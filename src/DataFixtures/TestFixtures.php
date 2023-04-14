@@ -43,8 +43,8 @@ class TestFixtures extends Fixture
         $this->loadUsers();
         $this->loadGestionnaireSalles();
         $this->loadDomaines();
-        $this->loadSalles();
         $this->loadTypeReservations();
+        $this->loadSalles();
         $this->loadReservations();
     }
 
@@ -377,21 +377,21 @@ class TestFixtures extends Fixture
             $this->manager->persist($reservation);
         }
 
-        // for ($i = 0; $i < 40; $i++ ) {
-        //     $reservation = new Reservation();
+        for ($i = 0; $i < 40; $i++ ) {
+            $reservation = new Reservation();
 
-        //     $reservation->setNom($this->faker->words(5, true));
-        //     $reservation->setDescription($this->faker->optional($weight = 0.6)->text());
-        //     $reservation->setDateDebut($this->faker->dateTimeBetween('-1 month', '- 1 week'));
-        //     $reservation->setDuree($this->faker->;
-        //     $reservation->setDateFin($this->faker->dateTimeBetween('date_debut', '+2 days'));
-        //     $reservation->setNombreParticipant($this->faker->numberBetween(5, 300));
-        //     $reservation->setSalle($this->faker->randomElement($salles));
-        //     $reservation->setTypeReservation($this->faker->randomElement($typeReservations));
-        //     $reservation->setGestionnaireSalle($this->faker->randomElement($gestionnaireSalles));
+            $reservation->setNom($this->faker->words(5, true));
+            $reservation->setDescription($this->faker->optional($weight = 0.6)->text());
+            $reservation->setDateDebut($this->faker->dateTimeBetween('-1 month', '- 1 week'));
+            $reservation->setDuree($this->faker->optional($weight = 0.8)->numerify('##:##:00'));
+            $reservation->setDateFin($this->faker->dateTimeBetween('date_debut', '+2 days'));
+            $reservation->setNombreParticipant($this->faker->numberBetween(5, 300));
+            $reservation->setSalle($this->faker->randomElement($salles));
+            $reservation->setTypeReservation($this->faker->randomElement($typeReservations));
+            $reservation->setGestionnaireSalle($this->faker->randomElement($gestionnaireSalles));
 
-        //     $this->manager->persist($reservation);
-        // }
+            $this->manager->persist($reservation);
+        }
 
         $this->manager->flush();
     }
