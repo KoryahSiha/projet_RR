@@ -245,7 +245,7 @@ class TestFixtures extends Fixture
             $salle = new Salle();
 
             $salle->setNom(ucfirst($this->faker->words(3, true)));
-            $salle->setDescription($this->faker->optional($weight = 0.6)->text());
+            $salle->setDescription($this->faker->optional($weight = 0.7)->text());
             $salle->setPersonnesMax($this->faker->optional($weight = 0.8)->numberBetween(0, 300));
             $salle->setDomaine($this->faker->randomElement($domaines));
 
