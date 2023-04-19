@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -15,6 +18,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Email]
+    #[Assert\Length(
+        min: 5,
+        max: 180,
+    )]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -24,6 +33,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 8,
+        max: 255,
+    )]
+    #[Assert\Regex(
+        pattern: '/[a-z]+/',
+        match: true,
+        message: 'Vous devez utiliser au moins une lettre minuscule',
+        )]
+    #[Assert\Regex(
+        pattern: '/[A-Z]+/',
+        match: true,
+        message: 'Vous devez utiliser au moins une lettre mmajuscule',
+        )]
+    #[Assert\Regex(
+        pattern: '/[0-9]+/',
+        match: true,
+        message: 'Vous devez utiliser au moins un chiffre',
+        )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9]+$/',
+        match: false,
+        message: 'Vous devez utiliser au moins un caractère spécial',
+    )]
     #[ORM\Column]
     private ?string $password = null;
 

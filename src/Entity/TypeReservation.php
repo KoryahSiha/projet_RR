@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TypeReservationRepository::class)]
 class TypeReservation
@@ -16,9 +17,17 @@ class TypeReservation
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(
+        min: 1,
+        max: 255,
+    )]
     #[ORM\Column(length: 255, unique: true)]
     private ?string $nom = null;
 
+    #[Assert\Length(
+        min: 10,
+        max: 1000,
+    )]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 

@@ -6,6 +6,7 @@ use App\Repository\GestionnaireSalleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GestionnaireSalleRepository::class)]
 class GestionnaireSalle
@@ -15,9 +16,17 @@ class GestionnaireSalle
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(
+        min: 1,
+        max: 255,
+    )]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[Assert\Length(
+        min: 1,
+        max: 255,
+    )]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
