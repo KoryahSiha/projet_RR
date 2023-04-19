@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New GestionnaireSalle{% endblock %}
+
+{% block body %}
+    <h1>Create new GestionnaireSalle</h1>
+
+    {{ include('gestionnaire_salle/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_gestionnaire_salle_index') }}">back to list</a>
+{% endblock %}

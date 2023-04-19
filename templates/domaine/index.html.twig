@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Domaine index{% endblock %}
+
+{% block body %}
+    <h1>Domaine index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for domaine in domaines %}
+            <tr>
+                <td>{{ domaine.id }}</td>
+                <td>{{ domaine.nom }}</td>
+                <td>
+                    
+                    <a href="{{ path('app_domaine_show', {'id': domaine.id}) }}">show</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_domaine_edit', {'id': domaine.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

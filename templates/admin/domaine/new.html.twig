@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau domaine{% endblock %}
+
+{% block body %}
+    <h1>Création d'un nouveau domaine</h1>
+
+    {{ include('domaine/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_domaine_index') }}">Retour à la liste</a>
+{% endblock %}

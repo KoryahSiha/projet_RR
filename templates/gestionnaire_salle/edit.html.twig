@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit GestionnaireSalle{% endblock %}
+
+{% block body %}
+    <h1>Edit GestionnaireSalle</h1>
+
+    {{ include('gestionnaire_salle/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_gestionnaire_salle_index') }}">back to list</a>
+
+    {{ include('gestionnaire_salle/_delete_form.html.twig') }}
+{% endblock %}
