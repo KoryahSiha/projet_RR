@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const ROLES = ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_GESTIONNAIRESAL', 'ROLE_GESTIONNAIREDOM'];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -176,9 +178,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setGestionnaireSalle(GestionnaireSalle $gestionnaireSalle): self
     {
         // set the owning side of the relation if necessary
-        if ($gestionnaireSalle->getUser() !== $this) {
-            $gestionnaireSalle->setUser($this);
-        }
+        // if ($gestionnaireSalle->getUser() !== $this) {
+        //     $gestionnaireSalle->setUser($this);
+        // }
 
         $this->gestionnaireSalle = $gestionnaireSalle;
 
