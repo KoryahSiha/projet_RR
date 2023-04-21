@@ -2,7 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\GestionnaireSalle;
 use App\Entity\Reservation;
+use App\Entity\Salle;
+use App\Entity\TypeReservation;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

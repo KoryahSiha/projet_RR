@@ -59,8 +59,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
             // }
             // @todo si l'utilisateur n'est pas un admin, une fois la connexion validée, renvoie vers la page d'accueil de l'agenda
             return new RedirectResponse($this->urlGenerator->generate
-            ('app_gestionnaire_salle_show', [
-                'id' => $user->getGestionnaireSalle()->getId(),
+            ('app_user_show', [
+                'id' => $user->getId(),
             ]));
         }
 

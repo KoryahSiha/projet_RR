@@ -22,9 +22,13 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_gestionnaire_salle_index') }}">back to list</a>
+    <a href="{{ path('app_gestionnaire_salle_index') }}">retour à la liste</a>
 
-    <a href="{{ path('app_gestionnaire_salle_edit', {'id': gestionnaire_salle.id}) }}">edit</a>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_gestionnaire_salle_edit', {'id': gestionnaire_salle.id}) }}">éditer</a>
+    {% endif %}
 
+    {% if is_granted('ROLE_ADMIN') %}
     {{ include('gestionnaire_salle/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}

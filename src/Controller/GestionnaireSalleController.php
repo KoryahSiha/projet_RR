@@ -29,6 +29,25 @@ class GestionnaireSalleController extends AbstractController
         ]);
     }
 
+    #[Route('/new', name: 'app_gestionnaire_salle_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, GestionnaireSalleRepository $gestionnaireSalleRepository): Response
+    {
+        $gestionnaireSalle = new GestionnaireSalle();
+        $form = $this->createForm(GestionnaireSalleType::class, $gestionnaireSalle);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $gestionnaireSalleRepository->save($gestionnaireSalle, true);
+
+            return $this->redirectToRoute('app_gestionnaire_salle_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('gestionnaire_salle/new.html.twig', [
+            'gestionnaire_salle' => $gestionnaireSalle,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_gestionnaire_salle_show', methods: ['GET'])]
     public function show(GestionnaireSalle $gestionnaireSalle): Response
     {
@@ -65,5 +84,15 @@ class GestionnaireSalleController extends AbstractController
             'gestionnaire_salle' => $gestionnaireSalle,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{id}', name: 'app_gestionnaire_salle_delete', methods: ['POST'])]
+    public function delete(Request $request, GestionnaireSalle $gestionnaireSalle, GestionnaireSalleRepository $gestionnaireSalleRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$gestionnaireSalle->getId(), $request->request->get('_token'))) {
+            $gestionnaireSalleRepository->remove($gestionnaireSalle, true);
+        }
+
+        return $this->redirectToRoute('app_gestionnaire_salle_index', [], Response::HTTP_SEE_OTHER);
     }
 }

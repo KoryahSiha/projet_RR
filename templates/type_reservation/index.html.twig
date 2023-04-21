@@ -21,9 +21,9 @@
                 <td>{{ type_reservation.nom }}</td>
                 <td>{{ type_reservation.description }}</td>
                 <td>
-                    <a href="{{ path('app_type_reservation_show', {'id': type_reservation.id}) }}">show</a>
+                    <a href="{{ path('app_type_reservation_show', {'id': type_reservation.id}) }}">voir</a>
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
-                    <a href="{{ path('app_type_reservation_edit', {'id': type_reservation.id}) }}">edit</a>
+                    <a href="{{ path('app_type_reservation_edit', {'id': type_reservation.id}) }}">éditer</a>
                     {% endif %}
                 </td>
             </tr>
