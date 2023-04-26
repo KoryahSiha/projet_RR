@@ -48,7 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Regex(
         pattern: '/[A-Z]+/',
         match: true,
-        message: 'Vous devez utiliser au moins une lettre mmajuscule',
+        message: 'Vous devez utiliser au moins une lettre majuscule',
         )]
     #[Assert\Regex(
         pattern: '/[0-9]+/',

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -14,21 +15,40 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 1,
+        max: 255,
+    )]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[Assert\Length(
+        min: 10,
+        max: 1000,
+    )]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Date]
+    #[Assert\GreaterThan('today')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_debut = null;
 
+    
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $duree = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Date]
+    #[Assert\GreaterThan(
+        propertyPath: 'date_debut'
+    )]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_fin = null;
 
+    #[Assert\Positive]
     #[ORM\Column(nullable: true)]
     private ?int $nombre_participant = null;
 
