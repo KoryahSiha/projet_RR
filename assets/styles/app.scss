@@ -1,3 +1,19 @@
-body {
-    background-color: rgb(170, 255, 179);
-}
+// Permet de modifier les couleurs de Bootstrap
+$primary:       #772953;
+$secondary:     #948e87;
+$success:       #30993f;
+$info:          #148a9c;
+$warning:       #cb9c35;
+$danger:        #be3025;
+$light:         #c6c9cb;
+// $dark:          #772953;
+
+/* Bootstrap */
+@import "~bootstrap/scss/bootstrap";
+
+
+/* Pages */
+@import "./pages/home";
+
+/* Partials */
+@import "./partials/header";
