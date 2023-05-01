@@ -30,7 +30,10 @@ class UserType extends AbstractType
             ->add('email')
             ->add('roles', ChoiceType::class, [
                 'choices' => $choices,
+                // si la valeur est 'true', plusieurs options peuvent être sélectionnées.
                 'multiple' => true,
+                // si la valeur est 'true', des boutons radio ou des cases à cocher seront rendus. Si la valeur est 'false', un élément select sera rendu.
+                'expanded' => true,
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -42,12 +45,12 @@ class UserType extends AbstractType
                 'class' => GestionnaireSalle::class,
             
                 'choice_label' => function(GestionnaireSalle $element) {
-                    return "{$element->getNom()} {$element->getPrenom()} (id {$element->getId()})";
+                    return "{$element->getNom()} {$element->getPrenom()}";
                 },
             
                 'multiple' => false,
                 'expanded' => false,
-                // autorise à ne renseigner aucun gestionnaire de salle
+                // autorise à laisser vide, n'est pas requis.
                 'required' => false,
             ])
         ;
