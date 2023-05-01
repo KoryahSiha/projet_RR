@@ -12,7 +12,7 @@ class HomeController extends AbstractController
     public function home()
     {
         // affichage d'une vue sans transmission de variables
-        return $this->render('home.html.twig');
+        return $this->render('pages/home.html.twig');
     }
 
 }
