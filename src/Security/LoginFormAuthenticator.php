@@ -52,7 +52,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         if (in_array('ROLE_ADMIN', $roles)) {
             // @todo si l'utilisateur est un admin, une fois la connexion validée, renvoie vers le dashboard
             return new RedirectResponse($this->urlGenerator->generate
-            ('app_reservation_index'));
+            ('admin'));
         } else {
             /// if (!$user->getGestionnaireSalle()) {
             //     throw new Exception("Le compte utilisateur {$user->getId()} n'est relié à aucun gestionnaire de salle");
