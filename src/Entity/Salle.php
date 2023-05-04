@@ -2,15 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\SalleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SalleRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 #[ORM\Entity(repositoryClass: SalleRepository::class)]
+#[UniqueEntity(fields: ['nom'], message: 'Une salle existe déjà sous ce nom')]
 class Salle
 {
     #[ORM\Id]
@@ -18,7 +20,7 @@ class Salle
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Soyez créatif, et pensez à un nom !")]
     #[Assert\Length(
         min: 1,
         max: 255,
@@ -37,6 +39,7 @@ class Salle
     #[ORM\Column(nullable: true)]
     private ?int $personnes_max = null;
 
+    #[Assert\NotBlank(message: "Veuillez renseigner un domaine")]
     #[ORM\ManyToOne(inversedBy: 'salles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Domaine $domaine = null;

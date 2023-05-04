@@ -16,7 +16,7 @@ class GestionnaireSalle
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Veuillez renseigner un nom")]
     #[Assert\Length(
         min: 1,
         max: 255,
@@ -24,7 +24,7 @@ class GestionnaireSalle
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Veuillez renseigner un prénom")]
     #[Assert\Length(
         min: 1,
         max: 255,
@@ -32,6 +32,7 @@ class GestionnaireSalle
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+    #[Assert\NotNull(message: "Veuillez renseigner un utilisateur")]
     #[ORM\OneToOne(inversedBy: 'gestionnaireSalle', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;

@@ -7,8 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: DomaineRepository::class)]
+#[UniqueEntity(fields: ['nom'], message: 'Un domaine existe déjà sous ce nom')]
 class Domaine
 {
     #[ORM\Id]
@@ -16,7 +18,7 @@ class Domaine
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Soyez créatif, et pensez à un nom !")]
     #[Assert\Length(
         min: 1,
         max: 255,

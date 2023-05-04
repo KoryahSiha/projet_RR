@@ -15,7 +15,7 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Soyez créatif, et pensez à un nom !")]
     #[Assert\Length(
         min: 1,
         max: 255,
@@ -30,21 +30,14 @@ class Reservation
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[Assert\NotBlank]
-    #[Assert\Date]
-    #[Assert\GreaterThan('today')]
+    #[Assert\Type("DateTime")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_debut = null;
-
-    
+   
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $duree = null;
 
-    #[Assert\NotBlank]
-    #[Assert\Date]
-    #[Assert\GreaterThan(
-        propertyPath: 'date_debut'
-    )]
+    #[Assert\Type("DateTime")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_fin = null;
 
@@ -52,14 +45,17 @@ class Reservation
     #[ORM\Column(nullable: true)]
     private ?int $nombre_participant = null;
 
+    #[Assert\NotNull(message: "Veuillez renseigner une salle")]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Salle $salle = null;
 
+    #[Assert\NotNull(message: "Veuillez renseigner un type de réservation")]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?TypeReservation $type_reservation = null;
 
+    #[Assert\NotNull(message: "Veuillez renseigner un gestionnaire de salle")]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?GestionnaireSalle $gestionnaire_salle = null;

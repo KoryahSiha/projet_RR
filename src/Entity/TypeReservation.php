@@ -7,9 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TypeReservationRepository::class)]
+#[UniqueEntity(fields: ['nom'], message: 'Un type de réservation existe déjà sous ce nom')]
 class TypeReservation
 {
     #[ORM\Id]
@@ -17,7 +19,7 @@ class TypeReservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Soyez créatif, et pensez à un nom !")]
     #[Assert\Length(
         min: 1,
         max: 255,
