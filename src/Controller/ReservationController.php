@@ -5,19 +5,34 @@ namespace App\Controller;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/reservation')]
 class ReservationController extends AbstractController
 {
+    /**
+     * Cette fonction affiche toutes les réservations.
+     *
+     * @param ReservationRepository $reservationRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
-    public function index(ReservationRepository $reservationRepository): Response
+    public function index(ReservationRepository $reservationRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        return $this->render('reservation/index.html.twig', [
-            'reservations' => $reservationRepository->findAll(),
+        $reservations = $paginator->paginate(
+            $reservationRepository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+
+        return $this->render('pages/reservation/index.html.twig', [
+            'reservations' => $reservations,
         ]);
     }
 
@@ -34,7 +49,7 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('reservation/new.html.twig', [
+        return $this->renderForm('pages/reservation/new.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
         ]);
@@ -43,7 +58,7 @@ class ReservationController extends AbstractController
     #[Route('/{id}', name: 'app_reservation_show', methods: ['GET'])]
     public function show(Reservation $reservation): Response
     {
-        return $this->render('reservation/show.html.twig', [
+        return $this->render('pages/reservation/show.html.twig', [
             'reservation' => $reservation,
         ]);
     }
@@ -60,7 +75,7 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('reservation/edit.html.twig', [
+        return $this->renderForm('pages/reservation/edit.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
         ]);

@@ -5,19 +5,34 @@ namespace App\Controller;
 use App\Entity\Salle;
 use App\Form\SalleType;
 use App\Repository\SalleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/salle')]
 class SalleController extends AbstractController
 {
+    /**
+     * Cette fonction affiche toutes les salles.
+     *
+     * @param SalleRepository $salleRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/', name: 'app_salle_index', methods: ['GET'])]
-    public function index(SalleRepository $salleRepository): Response
+    public function index(SalleRepository $salleRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        return $this->render('salle/index.html.twig', [
-            'salles' => $salleRepository->findAll(),
+        $salles = $paginator->paginate(
+            $salleRepository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+
+        return $this->render('pages/salle/index.html.twig', [
+            'salles' => $salles,
         ]);
     }
 
@@ -34,7 +49,7 @@ class SalleController extends AbstractController
             return $this->redirectToRoute('app_salle_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('salle/new.html.twig', [
+        return $this->renderForm('pages/salle/new.html.twig', [
             'salle' => $salle,
             'form' => $form,
         ]);
@@ -43,7 +58,7 @@ class SalleController extends AbstractController
     #[Route('/{id}', name: 'app_salle_show', methods: ['GET'])]
     public function show(Salle $salle): Response
     {
-        return $this->render('salle/show.html.twig', [
+        return $this->render('pages/salle/show.html.twig', [
             'salle' => $salle,
         ]);
     }
@@ -60,7 +75,7 @@ class SalleController extends AbstractController
             return $this->redirectToRoute('app_salle_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('salle/edit.html.twig', [
+        return $this->renderForm('pages/salle/edit.html.twig', [
             'salle' => $salle,
             'form' => $form,
         ]);

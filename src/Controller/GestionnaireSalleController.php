@@ -5,26 +5,39 @@ namespace App\Controller;
 use App\Entity\GestionnaireSalle;
 use App\Form\GestionnaireSalleType;
 use App\Repository\GestionnaireSalleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/gestionnaire-salle')]
 class GestionnaireSalleController extends AbstractController
 {
+    /**
+     * Cette fonction affiche tous les gestionnaires de salle.
+     *
+     * @param GestionnaireSalleRepository $gestionnaireSalleRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/', name: 'app_gestionnaire_salle_index', methods: ['GET'])]
-    public function index(GestionnaireSalleRepository $gestionnaireSalleRepository): Response
+    public function index(GestionnaireSalleRepository $gestionnaireSalleRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $gestionnaireSalles = $gestionnaireSalleRepository->findAll();
+        $gestionnaireSalles = $paginator->paginate(
+            $gestionnaireSalleRepository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+        
+        // if (!$this->isGranted('ROLE_ADMIN')) {
+        //     $user = $this->getUser();
+        //     $gestionnaireSalle = $user->getGestionnaireSalle();
+        // }
 
-        if (!$this->isGranted('ROLE_ADMIN')) {
-            $user = $this->getUser();
-            $gestionnaireSalle = $user->getGestionnaireSalle();
-        }
-
-        return $this->render('gestionnaire_salle/index.html.twig', [
+        return $this->render('pages/gestionnaire_salle/index.html.twig', [
             'gestionnaire_salles' => $gestionnaireSalles,
         ]);
     }
@@ -42,7 +55,7 @@ class GestionnaireSalleController extends AbstractController
             return $this->redirectToRoute('app_gestionnaire_salle_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('gestionnaire_salle/new.html.twig', [
+        return $this->renderForm('pages/gestionnaire_salle/new.html.twig', [
             'gestionnaire_salle' => $gestionnaireSalle,
             'form' => $form,
         ]);
@@ -51,7 +64,7 @@ class GestionnaireSalleController extends AbstractController
     #[Route('/{id}', name: 'app_gestionnaire_salle_show', methods: ['GET'])]
     public function show(GestionnaireSalle $gestionnaireSalle): Response
     {
-        return $this->render('gestionnaire_salle/show.html.twig', [
+        return $this->render('pages/gestionnaire_salle/show.html.twig', [
             'gestionnaire_salle' => $gestionnaireSalle,
         ]);
     }
@@ -80,7 +93,7 @@ class GestionnaireSalleController extends AbstractController
             return $this->redirectToRoute('app_gestionnaire_salle_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('gestionnaire_salle/edit.html.twig', [
+        return $this->renderForm('pages/gestionnaire_salle/edit.html.twig', [
             'gestionnaire_salle' => $gestionnaireSalle,
             'form' => $form,
         ]);

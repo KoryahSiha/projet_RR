@@ -5,19 +5,34 @@ namespace App\Controller;
 use App\Entity\Domaine;
 use App\Form\DomaineType;
 use App\Repository\DomaineRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/domaine')]
 class DomaineController extends AbstractController
 {
+    /**
+     * Cette fonction affiche tous les domaines.
+     *
+     * @param DomaineRepository $domaineRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/', name: 'app_domaine_index', methods: ['GET'])]
-    public function index(DomaineRepository $domaineRepository): Response
+    public function index(DomaineRepository $domaineRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        return $this->render('domaine/index.html.twig', [
-            'domaines' => $domaineRepository->findAll(),
+        $domaines = $paginator->paginate(
+            $domaineRepository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+
+        return $this->render('pages/domaine/index.html.twig', [
+            'domaines' => $domaines,
         ]);
     }
 
@@ -34,7 +49,7 @@ class DomaineController extends AbstractController
             return $this->redirectToRoute('app_domaine_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('domaine/new.html.twig', [
+        return $this->renderForm('pages/domaine/new.html.twig', [
             'domaine' => $domaine,
             'form' => $form,
         ]);
@@ -43,7 +58,7 @@ class DomaineController extends AbstractController
     #[Route('/{id}', name: 'app_domaine_show', methods: ['GET'])]
     public function show(Domaine $domaine): Response
     {
-        return $this->render('domaine/show.html.twig', [
+        return $this->render('pages/domaine/show.html.twig', [
             'domaine' => $domaine,
         ]);
     }
@@ -60,7 +75,7 @@ class DomaineController extends AbstractController
             return $this->redirectToRoute('app_domaine_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('domaine/edit.html.twig', [
+        return $this->renderForm('pages/domaine/edit.html.twig', [
             'domaine' => $domaine,
             'form' => $form,
         ]);

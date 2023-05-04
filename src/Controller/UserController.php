@@ -5,20 +5,35 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    /**
+     * Cette fonction affiche tous les utilisateurs.
+     *
+     * @param UserRepository $userRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+        $users = $paginator->paginate(
+            $userRepository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            20 /*limit per page*/
+        );
+
+        return $this->render('pages/user/index.html.twig', [
+            'users' => $users,
         ]);
     }
 
@@ -34,10 +49,16 @@ class UserController extends AbstractController
             $user->setPassword($password);
             $userRepository->save($user, true);
 
+            $this->addFlash(
+                'success',
+                'Le compte a été créé avec succès !'
+            );
+            
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/new.html.twig', [
+
+        return $this->renderForm('pages/user/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
@@ -46,7 +67,7 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        return $this->render('user/show.html.twig', [
+        return $this->render('pages/user/show.html.twig', [
             'user' => $user,
         ]);
     }
@@ -70,7 +91,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/edit.html.twig', [
+        return $this->renderForm('pages/user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

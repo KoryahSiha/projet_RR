@@ -4,20 +4,35 @@ namespace App\Controller;
 
 use App\Entity\TypeReservation;
 use App\Form\TypeReservationType;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\TypeReservationRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/type-reservation')]
 class TypeReservationController extends AbstractController
 {
+    /**
+     * Cette fonction affiche tous les types de réservation.
+     *
+     * @param TypeReservationRepository $typeReservationRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/', name: 'app_type_reservation_index', methods: ['GET'])]
-    public function index(TypeReservationRepository $typeReservationRepository): Response
+    public function index(TypeReservationRepository $typeReservationRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        return $this->render('type_reservation/index.html.twig', [
-            'type_reservations' => $typeReservationRepository->findAll(),
+        $typeReservations = $paginator->paginate(
+            $typeReservationRepository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+
+        return $this->render('pages/type_reservation/index.html.twig', [
+            'type_reservations' => $typeReservations,
         ]);
     }
 
@@ -34,7 +49,7 @@ class TypeReservationController extends AbstractController
             return $this->redirectToRoute('app_type_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('type_reservation/new.html.twig', [
+        return $this->renderForm('pages/type_reservation/new.html.twig', [
             'type_reservation' => $typeReservation,
             'form' => $form,
         ]);
@@ -43,7 +58,7 @@ class TypeReservationController extends AbstractController
     #[Route('/{id}', name: 'app_type_reservation_show', methods: ['GET'])]
     public function show(TypeReservation $typeReservation): Response
     {
-        return $this->render('type_reservation/show.html.twig', [
+        return $this->render('pages/type_reservation/show.html.twig', [
             'type_reservation' => $typeReservation,
         ]);
     }
@@ -60,7 +75,7 @@ class TypeReservationController extends AbstractController
             return $this->redirectToRoute('app_type_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('type_reservation/edit.html.twig', [
+        return $this->renderForm('pages/type_reservation/edit.html.twig', [
             'type_reservation' => $typeReservation,
             'form' => $form,
         ]);
