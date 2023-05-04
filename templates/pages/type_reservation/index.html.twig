@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Types de réservation index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        {% if not type_reservations.items is same as([]) %}
+        <h1>Types de réservation</h1>
+        
+        <div class="count mt-4">Il y a
+            {{ type_reservations.getTotalItemCount }}
+            types de réservation au total.
+        </div>
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
+                        <th>actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for type_reservation in type_reservations %}
+                <tr>
+                    <td>{{ type_reservation.id }}</td>
+                    <td>{{ type_reservation.nom }}</td>
+                    <td>{{ type_reservation.description }}</td>
+                    <td>
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
+                        <a href="{{ path('app_type_reservation_show', {'id': type_reservation.id}) }}">voir</a>
+                        <a href="{{ path('app_type_reservation_edit', {'id': type_reservation.id}) }}">éditer</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation d-flex justify-content-end">
+            {{ knp_pagination_render(type_reservations) }}
+        </div>
+        {% else %}
+            <h4>Il n'y a pas de types de réservation</h4>
+        {% endif %}
+        
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
+        <a href="{{ path('app_type_reservation_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer un nouveau type de réservation</a>
+        {% endif %}
+    </div>
+
+{% endblock %}

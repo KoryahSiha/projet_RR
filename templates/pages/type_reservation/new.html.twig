@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau type de réservation{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Créer un nouveau type de réservation</h1>
+
+        {{ include('pages/type_reservation/_form.html.twig') }}
+
+        <div class="mt-4">
+            <a href="{{ path('app_type_reservation_index') }}">retour à la liste</a>
+        </div>
+    </div>
+{% endblock %}

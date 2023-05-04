@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Domaines index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        {% if not domaines.items is same as([]) %}
+        <h1>Domaines</h1>
+
+        <div class="count mt-4">Il y a
+            {{ domaines.getTotalItemCount }}
+            domaines au total.
+        </div>
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <th>actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for domaine in domaines %}
+                <tr>
+                    <td>{{ domaine.id }}</td>
+                    <td>{{ domaine.nom }}</td>
+                    <td>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_domaine_show', {'id': domaine.id}) }}">voir</a>
+                        <a href="{{ path('app_domaine_edit', {'id': domaine.id}) }}">éditer</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation d-flex justify-content-end">
+            {{ knp_pagination_render(domaines) }}
+        </div>
+        {% else %}
+            <h4>Il n'y a pas de domaines</h4>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_domaine_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer un nouveau domaine</a>
+        {% endif %}
+    </div>
+
+{% endblock %}

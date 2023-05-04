@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservations index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        {% if not reservations.items is same as([]) %}
+        <h1>Réservations</h1>
+        
+        <div class="count mt-4">Il y a
+            {{ reservations.getTotalItemCount }}
+            réservations au total.
+        </div>
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Date début</th>
+                    <th>Durée</th>
+                    <th>Date fin</th>
+                    <th>Nombre participants</th>
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
+                        <th>actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.id }}</td>
+                    <td>{{ reservation.nom }}</td>
+                    <td>{{ reservation.description }}</td>
+                    <td>{{ reservation.dateDebut ? reservation.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ reservation.duree }}</td>
+                    <td>{{ reservation.dateFin ? reservation.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ reservation.nombreParticipant }}</td>
+                    <td>
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
+                        <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">voir</a>
+                        <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">éditer</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation d-flex justify-content-end mt-4">
+            {{ knp_pagination_render(reservations) }}
+        </div>
+        {% else %}
+            <h4>Il n'y a pas de réservations</h4>
+        {% endif %}
+        
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
+        <a href="{{ path('app_reservation_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer une nouvelle réservation</a>
+        {% endif %}
+    </div>
+{% endblock %}

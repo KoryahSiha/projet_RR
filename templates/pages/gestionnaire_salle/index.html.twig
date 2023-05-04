@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestionnaires de salle index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        {% if not gestionnaire_salles.items is same as([]) %}
+        <h1>Gestionnaires de salle</h1>
+
+        <div class="count mt-4">Il y a
+            {{ gestionnaire_salles.getTotalItemCount }}
+            gestionnaires de salle au total.
+        </div>
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <th>actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for gestionnaire_salle in gestionnaire_salles %}
+                <tr>
+                    <td>{{ gestionnaire_salle.id }}</td>
+                    <td>{{ gestionnaire_salle.nom }}</td>
+                    <td>{{ gestionnaire_salle.prenom }}</td>
+                    <td>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_gestionnaire_salle_show', {'id': gestionnaire_salle.id}) }}">voir</a>
+                        <a href="{{ path('app_gestionnaire_salle_edit', {'id': gestionnaire_salle.id}) }}">éditer</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation d-flex justify-content-end">
+            {{ knp_pagination_render(gestionnaire_salles) }}
+        </div>
+        {% else %}
+            <h4>Il n'y a pas de gestionnaires de salle</h4>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_gestionnaire_salle_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer un nouveau gestionnaire de salle</a>
+        {% endif %}
+    </div>
+
+{% endblock %}

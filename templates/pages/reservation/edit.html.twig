@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification réservation{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Modification de la réservation</h1>
+
+        {{ include('pages/reservation/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+        <a href="{{ path('app_reservation_index') }}">retour à la liste</a>
+
+        {{ include('pages/reservation/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

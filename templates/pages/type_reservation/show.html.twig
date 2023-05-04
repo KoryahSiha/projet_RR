@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Type de réservation{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Type de réservation</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ type_reservation.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ type_reservation.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ type_reservation.description }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_type_reservation_index') }}">retour à la liste</a>
+
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
+        <a href="{{ path('app_type_reservation_edit', {'id': type_reservation.id}) }}">éditer</a>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
+        {{ include('pages/type_reservation/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ÉModification gestionnaire de salle{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Modification du gestionnaire de salle</h1>
+
+
+        {{ include('pages/gestionnaire_salle/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+        <div class="mt-4">
+        <a href="{{ path('app_gestionnaire_salle_index') }}">retour à la liste</a>
+        </div>
+
+        {{ include('pages/gestionnaire_salle/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

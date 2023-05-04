@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau domaine{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="mt-4">Création d'un domaine</h1>
+
+        {{ include('pages/domaine/_form.html.twig') }}
+
+        <div class="mt-4">
+            <a href="{{ path('app_domaine_index') }}">retour à la liste</a>
+        </div>
+    </div>
+{% endblock %}

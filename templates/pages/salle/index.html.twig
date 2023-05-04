@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salles index{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        {% if not salles.items is same as([]) %}
+        <h1>Salles</h1>
+        
+        <div class="count mt-4">Il y a
+            {{ salles.getTotalItemCount }}
+            salles au total.
+        </div>
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Personnes max</th>
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIREDOM') %}
+                        <th>actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for salle in salles %}
+                <tr>
+                    <td>{{ salle.id }}</td>
+                    <td>{{ salle.nom }}</td>
+                    <td>{{ salle.description }}</td>
+                    <td>{{ salle.personnesMax }}</td>
+                    <td>
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIREDOM') %}
+                        <a href="{{ path('app_salle_show', {'id': salle.id}) }}">voir</a>
+                        <a href="{{ path('app_salle_edit', {'id': salle.id}) }}">éditer</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation d-flex justify-content-end">
+            {{ knp_pagination_render(salles) }}
+        </div>
+        {% else %}
+            <h4>Il n'y a pas de salles</h4>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIREDOM') %}
+        <a href="{{ path('app_salle_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer une nouvelle salle</a>
+        {% endif %}
+    </div>
+
+{% endblock %}

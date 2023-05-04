@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestionnaire de salle{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Gestionnaire de salle</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ gestionnaire_salle.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ gestionnaire_salle.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Prénom</th>
+                    <td>{{ gestionnaire_salle.prenom }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_gestionnaire_salle_index') }}">retour à la liste</a>
+
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_gestionnaire_salle_edit', {'id': gestionnaire_salle.id}) }}">éditer</a>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+        {{ include('pages/gestionnaire_salle/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+{% endblock %}

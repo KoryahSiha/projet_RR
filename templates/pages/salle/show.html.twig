@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salle{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Salle</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ salle.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ salle.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ salle.description }}</td>
+                </tr>
+                <tr>
+                    <th>Personnes max</th>
+                    <td>{{ salle.personnesMax }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_salle_index') }}">retour à la liste</a>
+
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIREDOM') %}
+        <a href="{{ path('app_salle_edit', {'id': salle.id}) }}">éditer</a>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIREDOM') %}
+        {{ include('pages/salle/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+{% endblock %}

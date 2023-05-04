@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification domaine{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Modification du domaine</h1>
+
+        {# {{ form_start(form) }}
+
+        <div class="form-group mt-4">
+            {{ form_label(form.nom) }}
+            {{ form_widget(form.nom) }}
+            <div class="form-error">
+                {{ form_errors(form.nom) }}
+            </div>
+        </div> #}
+        {{ include('pages/domaine/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+        <div class="mt-4">
+        <a href="{{ path('app_domaine_index') }}">retour à la liste</a>
+        </div>
+
+        {{ include('pages/domaine/_delete_form.html.twig') }}
+        
+        {# {{ form_end(form) }} #}
+    </div>
+{% endblock %}
