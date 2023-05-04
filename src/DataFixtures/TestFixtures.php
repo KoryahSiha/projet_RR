@@ -383,7 +383,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $reservation->setDescription($this->faker->optional($weight = 0.6)->text());
             $reservation->setDateDebut($this->faker->dateTimeBetween('-1 month', '- 1 week'));
             $reservation->setDuree($this->faker->optional($weight = 0.8)->numerify('##:##:00'));
-            $reservation->setDateFin($this->faker->dateTimeBetween('date_debut', '+2 days'));
+            $reservation->setDateFin($this->faker->dateTimeBetween('-1 day', '+2 days'));
             $reservation->setNombreParticipant($this->faker->numberBetween(5, 300));
             $reservation->setSalle($this->faker->randomElement($salles));
             $reservation->setTypeReservation($this->faker->randomElement($typeReservations));
