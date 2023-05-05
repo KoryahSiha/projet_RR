@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DomaineController extends AbstractController
 {
     /**
-     * Cette fonction affiche tous les domaines.
+     * Ce contrôleur affiche tous les domaines.
      *
      * @param DomaineRepository $domaineRepository
      * @param PaginatorInterface $paginator
@@ -36,6 +36,13 @@ class DomaineController extends AbstractController
         ]);
     }
 
+    /**
+     * Ce contrôleur montre un formulaire qui crée un domaine.
+     *
+     * @param Request $request
+     * @param DomaineRepository $domaineRepository
+     * @return Response
+     */
     #[Route('/new', name: 'app_domaine_new', methods: ['GET', 'POST'])]
     public function new(Request $request, DomaineRepository $domaineRepository): Response
     {
