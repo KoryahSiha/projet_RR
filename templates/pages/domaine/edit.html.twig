@@ -17,11 +17,12 @@
         </div> #}
         {{ include('pages/domaine/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
+        {{ include('pages/domaine/_delete_form.html.twig') }}
+        
         <div class="mt-4">
-        <a href="{{ path('app_domaine_index') }}">retour à la liste</a>
+            <a href="{{ path('app_domaine_index') }}" class="btn btn-light btn-sm mb-4">retour à la liste</a>
         </div>
 
-        {{ include('pages/domaine/_delete_form.html.twig') }}
         
         {# {{ form_end(form) }} #}
     </div>

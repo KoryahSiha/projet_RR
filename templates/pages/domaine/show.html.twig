@@ -19,10 +19,10 @@
             </tbody>
         </table>
 
-        <a href="{{ path('app_domaine_index') }}">retour à la liste</a>
+        <a href="{{ path('app_domaine_index') }}" class="btn btn-light btn-sm">retour à la liste</a>
 
         {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('app_domaine_edit', {'id': domaine.id}) }}">éditer</a>
+        <a href="{{ path('app_domaine_edit', {'id': domaine.id}) }}" class="btn btn-light btn-sm">éditer</a>
         {% endif %}
 
         {% if is_granted('ROLE_ADMIN') %}
