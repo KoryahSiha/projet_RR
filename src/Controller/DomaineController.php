@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DomaineController extends AbstractController
 {
     /**
-     * Ce contrôleur affiche tous les domaines.
+     * Cette fonction affiche tous les domaines.
      *
      * @param DomaineRepository $domaineRepository
      * @param PaginatorInterface $paginator
