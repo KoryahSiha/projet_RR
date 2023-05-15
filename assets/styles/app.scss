@@ -1,4 +1,4 @@
-// Permet de modifier les couleurs de Bootstrap
+// Permet de modifier les couleurs du thème de Bootstrap
 $primary:       #772953;
 $secondary:     #948e87;
 $success:       #30993f;
@@ -14,6 +14,7 @@ $light:         #c6c9cb;
 
 /* Pages */
 @import "./pages/home";
+@import "./pages/login";
 
 /* Partials */
 @import "./partials/header";
