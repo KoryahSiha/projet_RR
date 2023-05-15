@@ -7,6 +7,10 @@
         {% if not reservations.items is same as([]) %}
         <h1>Réservations</h1>
         
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
+        <a href="{{ path('app_reservation_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer une nouvelle réservation</a>
+        {% endif %}
+        
         <div class="count mt-4">Il y a
             {{ reservations.getTotalItemCount }}
             réservations au total.
@@ -59,8 +63,5 @@
             <h4>Il n'y a pas de réservations</h4>
         {% endif %}
         
-        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
-        <a href="{{ path('app_reservation_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer une nouvelle réservation</a>
-        {% endif %}
     </div>
 {% endblock %}

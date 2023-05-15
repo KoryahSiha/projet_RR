@@ -7,6 +7,10 @@
         {% if not salles.items is same as([]) %}
         <h1>Salles</h1>
         
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIREDOM') %}
+        <a href="{{ path('app_salle_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer une nouvelle salle</a>
+        {% endif %}
+        
         <div class="count mt-4">Il y a
             {{ salles.getTotalItemCount }}
             salles au total.
@@ -52,9 +56,6 @@
             <h4>Il n'y a pas de salles</h4>
         {% endif %}
 
-        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIREDOM') %}
-        <a href="{{ path('app_salle_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer une nouvelle salle</a>
-        {% endif %}
     </div>
 
 {% endblock %}

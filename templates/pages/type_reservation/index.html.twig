@@ -7,6 +7,10 @@
         {% if not type_reservations.items is same as([]) %}
         <h1>Types de réservation</h1>
         
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
+        <a href="{{ path('app_type_reservation_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer un nouveau type de réservation</a>
+        {% endif %}
+        
         <div class="count mt-4">Il y a
             {{ type_reservations.getTotalItemCount }}
             types de réservation au total.
@@ -50,9 +54,6 @@
             <h4>Il n'y a pas de types de réservation</h4>
         {% endif %}
         
-        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
-        <a href="{{ path('app_type_reservation_new') }}" class="btn btn-primary mt-4 btn-sm mb-4">Créer un nouveau type de réservation</a>
-        {% endif %}
     </div>
 
 {% endblock %}
