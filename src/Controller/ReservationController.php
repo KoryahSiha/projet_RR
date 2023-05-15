@@ -26,9 +26,9 @@ class ReservationController extends AbstractController
     public function index(ReservationRepository $reservationRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $reservations = $paginator->paginate(
-            $reservationRepository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            $reservationRepository->findAll(), /* C'est la requête, non le résultat */
+            $request->query->getInt('page', 1), /*numéro de page*/
+            10 /*limite par page*/
         );
 
         return $this->render('pages/reservation/index.html.twig', [
