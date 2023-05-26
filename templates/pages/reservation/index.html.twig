@@ -35,12 +35,12 @@
             {% for reservation in reservations %}
                 <tr>
                     <td>{{ reservation.id }}</td>
-                    <td>{{ reservation.nom }}</td>
+                    <td>{{ reservation.title}}</td>
                     <td>{{ reservation.description }}</td>
-                    <td>{{ reservation.dateDebut ? reservation.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ reservation.duree }}</td>
-                    <td>{{ reservation.dateFin ? reservation.dateFin|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ reservation.nombreParticipant }}</td>
+                    <td>{{ reservation.start ? reservation.start|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ reservation.duration }}</td>
+                    <td>{{ reservation.end ? reservation.end|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ reservation.participantNumber }}</td>
                     <td>
                         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
                         <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">voir</a>

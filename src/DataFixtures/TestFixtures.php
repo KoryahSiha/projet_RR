@@ -315,63 +315,83 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
 
         $datas = [
             [
-                'nom' => 'Assochats',
+                'title' => 'Assochats',
                 'description' => 'Integer eget diam a diam viverra feugiat. Ut rutrum facilisis ligula, at finibus felis elementum vitae. Sed dictum eleifend vestibulum. Etiam quis mauris ac est dictum porttitor.',
-                'date_debut' => DateTime::createFromFormat('Y/m/d', '2023/04/21'),
-                'duree' => '04:15:00',
-                'date_fin' => DateTime::createFromFormat('Y/m/d', '2023/04/21'),
-                'nombre_participant' => 17,
+                'start' => DateTime::createFromFormat('Y/m/d', '2023/04/21'),
+                'duration' => '04:15:00',
+                'end' => DateTime::createFromFormat('Y/m/d', '2023/04/21'),
+                'participant_number' => 17,
                 'salle' => $salles[4],
                 'type_reservation' => $typeReservations[4],
                 'gestionnaire_salle' => $gestionnaireSalles[1],
+                'background_color' => 'green',
+                'border_color' => 'green',
+                'text_color' => 'white',
+                'all_day' => null
             ],
             [
-                'nom' => 'Réunion Chefs de services',
+                'title' => 'Réunion Chefs de services',
                 'description' => null,
-                'date_debut' => DateTime::createFromFormat('Y/m/d', '2023/04/13'),
-                'duree' => '02:00:00',
-                'date_fin' => DateTime::createFromFormat('Y/m/d', '2023/04/13'),
-                'nombre_participant' => 9,
+                'start' => DateTime::createFromFormat('Y/m/d', '2023/04/13'),
+                'duration' => '02:00:00',
+                'end' => DateTime::createFromFormat('Y/m/d', '2023/04/13'),
+                'participant_number' => 9,
                 'salle' => $salles[1],
                 'type_reservation' => $typeReservations[5],
                 'gestionnaire_salle' => $gestionnaireSalles[2],
+                'background_color' => 'green',
+                'border_color' => 'green',
+                'text_color' => 'white',
+                'all_day' => null
             ],
             [
-                'nom' => 'Gym d\'entretien',
+                'title' => 'Gym d\'entretien',
                 'description' => 'Ut non quam in diam tempor suscipit eu eget neque. Nullam feugiat nulla vel dictum aliquet. Integer tempus auctor venenatis. Curabitur sit amet magna turpis.',
-                'date_debut' => DateTime::createFromFormat('Y/m/d', '2023/04/26'),
-                'duree' => '04:30:00',
-                'date_fin' => DateTime::createFromFormat('Y/m/d', '2023/04/26'),
-                'nombre_participant' => 22,
+                'start' => DateTime::createFromFormat('Y/m/d', '2023/04/26'),
+                'duration' => '04:30:00',
+                'end' => DateTime::createFromFormat('Y/m/d', '2023/04/26'),
+                'participant_number' => 22,
                 'salle' => $salles[4],
                 'type_reservation' => $typeReservations[4],
                 'gestionnaire_salle' => $gestionnaireSalles[3],
+                'background_color' => 'orange',
+                'border_color' => 'orange',
+                'text_color' => 'black',
+                'all_day' => true
             ],
             [
-                'nom' => 'Mariage Mr et Mllle Grelot',
+                'title' => 'Mariage Mr et Mllle Grelot',
                 'description' => null,
-                'date_debut' => DateTime::createFromFormat('Y/m/d', '2023/04/15'),
-                'duree' => '30:00:00',
-                'date_fin' => DateTime::createFromFormat('Y/m/d', '2023/04/16'),
-                'nombre_participant' => 180,
+                'start' => DateTime::createFromFormat('Y/m/d', '2023/04/15'),
+                'duration' => '30:00:00',
+                'end' => DateTime::createFromFormat('Y/m/d', '2023/04/16'),
+                'participant_number' => 180,
                 'salle' => $salles[4],
                 'type_reservation' => $typeReservations[3],
                 'gestionnaire_salle' => $gestionnaireSalles[1],
+                'background_color' => 'blue',
+                'border_color' => 'green',
+                'text_color' => 'black',
+                'all_day' => false
             ],
         ];
 
         foreach ($datas as $data) {
             $reservation = new Reservation();
 
-            $reservation->setNom($data['nom']);
+            $reservation->setTitle($data['title']);
             $reservation->setDescription($data['description']);
-            $reservation->setDateDebut($data['date_debut']);
-            $reservation->setDuree($data['duree']);
-            $reservation->setDateFin($data['date_fin']);
-            $reservation->setNombreParticipant($data['nombre_participant']);
+            $reservation->setStart($data['start']);
+            $reservation->setDuration($data['duration']);
+            $reservation->setEnd($data['end']);
+            $reservation->setParticipantNumber($data['participant_number']);
             $reservation->setSalle($data['salle']);
             $reservation->setTypeReservation($data['type_reservation']);
             $reservation->setGestionnaireSalle($data['gestionnaire_salle']);
+            $reservation->setBackgroundColor($data['background_color']);
+            $reservation->setBorderColor($data['border_color']);
+            $reservation->setTextColor($data['text_color']);
+            $reservation->setAllDay($data['all_day']);
 
             $this->manager->persist($reservation);
         }
@@ -379,15 +399,20 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         for ($i = 0; $i < 40; $i++ ) {
             $reservation = new Reservation();
 
-            $reservation->setNom($this->faker->words(5, true));
+            $reservation->setTitle($this->faker->words(5, true));
             $reservation->setDescription($this->faker->optional($weight = 0.6)->text());
-            $reservation->setDateDebut($this->faker->dateTimeBetween('-1 month', '- 1 week'));
-            $reservation->setDuree($this->faker->optional($weight = 0.8)->numerify('##:##:00'));
-            $reservation->setDateFin($this->faker->dateTimeBetween('-1 day', '+2 days'));
-            $reservation->setNombreParticipant($this->faker->numberBetween(5, 300));
+            $reservation->setStart($this->faker->dateTimeBetween('-1 month', '- 1 week'));
+            $reservation->setDuration($this->faker->optional($weight = 0.8)->numerify('##:##:00'));
+            $reservation->setEnd($this->faker->dateTimeBetween('-1 day', '+2 days'));
+            $reservation->setParticipantNumber($this->faker->numberBetween(5, 300));
             $reservation->setSalle($this->faker->randomElement($salles));
             $reservation->setTypeReservation($this->faker->randomElement($typeReservations));
             $reservation->setGestionnaireSalle($this->faker->randomElement($gestionnaireSalles));
+            $reservation->setBackgroundColor($this->faker->hexColor());
+            $reservation->setBorderColor($this->faker->hexColor());
+            $reservation->setTextColor($this->faker->hexColor());
+            $reservation->setAllDay($this->faker->optional($weight = 0.8)->boolean());
+
 
             $this->manager->persist($reservation);
         }

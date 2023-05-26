@@ -14,7 +14,7 @@
                 </tr>
                 <tr>
                     <th>Nom</th>
-                    <td>{{ reservation.nom }}</td>
+                    <td>{{ reservation.title }}</td>
                 </tr>
                 <tr>
                     <th>Description</th>
@@ -22,19 +22,35 @@
                 </tr>
                 <tr>
                     <th>Date début</th>
-                    <td>{{ reservation.dateDebut ? reservation.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ reservation.start ? reservation.start|date('Y-m-d H:i:s') : '' }}</td>
                 </tr>
                 <tr>
                     <th>Durée</th>
-                    <td>{{ reservation.duree }}</td>
+                    <td>{{ reservation.duration }}</td>
                 </tr>
                 <tr>
                     <th>Date fin</th>
-                    <td>{{ reservation.dateFin ? reservation.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ reservation.end ? reservation.end|date('Y-m-d H:i:s') : '' }}</td>
                 </tr>
                 <tr>
                     <th>Nombre participants</th>
-                    <td>{{ reservation.nombreParticipant }}</td>
+                    <td>{{ reservation.participantNumber }}</td>
+                </tr>
+                <tr>
+                    <th>Couleur fond</th>
+                    <td>{{ reservation.backgroundColor }}</td>
+                </tr>
+                <tr>
+                    <th>Couleur bordure</th>
+                    <td>{{ reservation.borderColor }}</td>
+                </tr>
+                <tr>
+                    <th>Couleur texte</th>
+                    <td>{{ reservation.textColor }}</td>
+                </tr>
+                <tr>
+                    <th>Toute la journée</th>
+                    <td>{{ reservation.allDay }}</td>
                 </tr>
             </tbody>
         </table>

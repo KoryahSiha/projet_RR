@@ -13,27 +13,27 @@
             </tr>
             <tr>
                 <th>Nom</th>
-                <td>{{ reservation.nom }}</td>
+                <td>{{ reservation.title }}</td>
             </tr>
             <tr>
                 <th>Description</th>
                 <td>{{ reservation.description }}</td>
             </tr>
             <tr>
-                <th>Date_debut</th>
-                <td>{{ reservation.dateDebut ? reservation.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Date début</th>
+                <td>{{ reservation.start ? reservation.start|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Duree</th>
-                <td>{{ reservation.duree }}</td>
+                <th>Durée</th>
+                <td>{{ reservation.duration }}</td>
             </tr>
             <tr>
-                <th>Date_fin</th>
-                <td>{{ reservation.dateFin ? reservation.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Date fin</th>
+                <td>{{ reservation.end ? reservation.end|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Nombre_participant</th>
-                <td>{{ reservation.nombreParticipant }}</td>
+                <th>Nombre participants</th>
+                <td>{{ reservation.participant_number }}</td>
             </tr>
         </tbody>
     </table>

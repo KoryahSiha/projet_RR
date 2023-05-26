@@ -21,7 +21,7 @@ class Reservation
         max: 255,
     )]
     #[ORM\Column(length: 255)]
-    private ?string $nom = null;
+    private ?string $title = null;
 
     #[Assert\Length(
         min: 10,
@@ -32,18 +32,18 @@ class Reservation
 
     #[Assert\Type("DateTime")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_debut = null;
-   
+    private ?\DateTimeInterface $start = null;
+
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $duree = null;
+    private ?string $duration = null;
 
     #[Assert\Type("DateTime")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_fin = null;
+    private ?\DateTimeInterface $end = null;
 
     #[Assert\Positive]
     #[ORM\Column(nullable: true)]
-    private ?int $nombre_participant = null;
+    private ?int $participant_number = null;
 
     #[Assert\NotNull(message: "Veuillez renseigner une salle")]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
@@ -60,19 +60,31 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private ?GestionnaireSalle $gestionnaire_salle = null;
 
+    #[ORM\Column(length: 7)]
+    private ?string $background_color = null;
+
+    #[ORM\Column(length: 7)]
+    private ?string $border_color = null;
+
+    #[ORM\Column(length: 7)]
+    private ?string $text_color = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $all_day = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getTitle(): ?string
     {
-        return $this->nom;
+        return $this->title;
     }
 
-    public function setNom(string $nom): self
+    public function setTitle(string $title): self
     {
-        $this->nom = $nom;
+        $this->title = $title;
 
         return $this;
     }
@@ -89,50 +101,50 @@ class Reservation
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getStart(): ?\DateTimeInterface
     {
-        return $this->date_debut;
+        return $this->start;
     }
 
-    public function setDateDebut(\DateTimeInterface $date_debut): self
+    public function setStart(\DateTimeInterface $start): self
     {
-        $this->date_debut = $date_debut;
+        $this->start = $start;
 
         return $this;
     }
 
-    public function getDuree(): ?string
+    public function getDuration(): ?string
     {
-        return $this->duree;
+        return $this->duration;
     }
 
-    public function setDuree(?string $duree): self
+    public function setDuration(?string $duration): self
     {
-        $this->duree = $duree;
+        $this->duration = $duration;
 
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeInterface
+    public function getEnd(): ?\DateTimeInterface
     {
-        return $this->date_fin;
+        return $this->end;
     }
 
-    public function setDateFin(\DateTimeInterface $date_fin): self
+    public function setEnd(\DateTimeInterface $end): self
     {
-        $this->date_fin = $date_fin;
+        $this->end = $end;
 
         return $this;
     }
 
-    public function getNombreParticipant(): ?int
+    public function getParticipantNumber(): ?int
     {
-        return $this->nombre_participant;
+        return $this->participant_number;
     }
 
-    public function setNombreParticipant(?int $nombre_participant): self
+    public function setParticipantNumber(?int $participant_number): self
     {
-        $this->nombre_participant = $nombre_participant;
+        $this->participant_number = $participant_number;
 
         return $this;
     }
@@ -169,6 +181,54 @@ class Reservation
     public function setGestionnaireSalle(?GestionnaireSalle $gestionnaire_salle): self
     {
         $this->gestionnaire_salle = $gestionnaire_salle;
+
+        return $this;
+    }
+
+    public function getBackgroundColor(): ?string
+    {
+        return $this->background_color;
+    }
+
+    public function setBackgroundColor(string $background_color): self
+    {
+        $this->background_color = $background_color;
+
+        return $this;
+    }
+
+    public function getBorderColor(): ?string
+    {
+        return $this->border_color;
+    }
+
+    public function setBorderColor(string $border_color): self
+    {
+        $this->border_color = $border_color;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->text_color;
+    }
+
+    public function setTextColor(string $text_color): self
+    {
+        $this->text_color = $text_color;
+
+        return $this;
+    }
+
+    public function getAllDay(): ?bool
+    {
+        return $this->all_day;
+    }
+
+    public function setAllDay(?bool $all_day): self
+    {
+        $this->all_day = $all_day;
 
         return $this;
     }
