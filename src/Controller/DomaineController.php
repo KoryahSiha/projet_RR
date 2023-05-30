@@ -25,10 +25,12 @@ class DomaineController extends AbstractController
     #[Route('/', name: 'app_domaine_index', methods: ['GET'])]
     public function index(DomaineRepository $domaineRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        // permet de paginer
         $domaines = $paginator->paginate(
-            $domaineRepository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            // appelle la méthode findAllDomaines() du DomaineRepository pour récupérer tous les objets Domaine et les trier par ordre croissant des noms
+            $domaineRepository->findAllDomaines(), /* C'est la requête, non le résultat */
+            $request->query->getInt('page', 1), /* numéro de page */
+            10 /* limite par page */
         );
 
         return $this->render('pages/domaine/index.html.twig', [

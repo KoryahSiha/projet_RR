@@ -26,10 +26,12 @@ class GestionnaireSalleController extends AbstractController
     #[Route('/', name: 'app_gestionnaire_salle_index', methods: ['GET'])]
     public function index(GestionnaireSalleRepository $gestionnaireSalleRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        // permet de paginer
         $gestionnaireSalles = $paginator->paginate(
-            $gestionnaireSalleRepository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            // appelle la méthode findAllGestionnaireSalles() du GestionnaireSalleRepository pour récupérer tous les objets GestionnaireSalle et les trier par ordre croissant des noms
+            $gestionnaireSalleRepository->findAllGestionnaireSalles(), /* C'est la requête, non le résultat */
+            $request->query->getInt('page', 1), /* numéro de page */
+            10 /* limite par page */
         );
         
         // if (!$this->isGranted('ROLE_ADMIN')) {

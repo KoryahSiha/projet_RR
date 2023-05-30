@@ -39,6 +39,18 @@ class SalleRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    * @return Salle[] Retourne un tableau avec les objets de Salle, triés par ordre croissant des noms
+     */
+    public function findAllSalles(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Salle[] Returns an array of Salle objects
 //     */

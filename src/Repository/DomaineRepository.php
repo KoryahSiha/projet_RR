@@ -39,6 +39,18 @@ class DomaineRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    * @return Domaine[] Retourne un tableau avec les objets de Domaine, triés par ordre croissant des noms
+     */
+    public function findAllDomaines(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Domaine[] Returns an array of Domaine objects
 //     */

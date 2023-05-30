@@ -39,6 +39,18 @@ class GestionnaireSalleRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    * @return GestionnaireSalle[] Retourne un tableau avec les objets de GestionnaireSalle, triés par ordre croissant des noms
+     */
+    public function findAllGestionnaireSalles(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return GestionnaireSalle[] Returns an array of GestionnaireSalle objects
 //     */

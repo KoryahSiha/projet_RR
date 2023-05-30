@@ -26,10 +26,12 @@ class UserController extends AbstractController
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        // permet de paginer
         $users = $paginator->paginate(
-            $userRepository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            20 /*limit per page*/
+            // appelle la méthode findAllUsers() du UserRepository pour récupérer tous les objets User et les trier par ordre croissant des emails
+            $userRepository->findAllUsers(), /* C'est la requête, non le résultat */
+            $request->query->getInt('page', 1), /* numéro de page */
+            20 /* limite par page */
         );
 
         return $this->render('pages/user/index.html.twig', [

@@ -25,10 +25,12 @@ class SalleController extends AbstractController
     #[Route('/', name: 'app_salle_index', methods: ['GET'])]
     public function index(SalleRepository $salleRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        // permet de paginer
         $salles = $paginator->paginate(
-            $salleRepository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            // appelle la méthode findAllSalles() du SalleRepository pour récupérer tous les objets Salle et les trier par ordre croissant des noms
+            $salleRepository->findAllSalles(), /* C'est la requête, non le résultat */
+            $request->query->getInt('page', 1), /* numéro de page */
+            10 /* limite par page*/
         );
 
         return $this->render('pages/salle/index.html.twig', [

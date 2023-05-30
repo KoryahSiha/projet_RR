@@ -25,10 +25,12 @@ class TypeReservationController extends AbstractController
     #[Route('/', name: 'app_type_reservation_index', methods: ['GET'])]
     public function index(TypeReservationRepository $typeReservationRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        // permet de paginer
         $typeReservations = $paginator->paginate(
-            $typeReservationRepository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            // appelle la méthode findAllTypeReservations() du TypeReservationRepository pour récupérer tous les objets TypeReservation et les trier par ordre croissant des noms
+            $typeReservationRepository->findAllTypeReservations(), /* C'est la requête, non le résultat */
+            $request->query->getInt('page', 1), /* numéro de page */
+            10 /* limite par page */
         );
 
         return $this->render('pages/type_reservation/index.html.twig', [

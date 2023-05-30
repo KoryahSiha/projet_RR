@@ -25,10 +25,12 @@ class ReservationController extends AbstractController
     #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
     public function index(ReservationRepository $reservationRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        // permet de paginer
         $reservations = $paginator->paginate(
-            $reservationRepository->findAll(), /* C'est la requête, non le résultat */
-            $request->query->getInt('page', 1), /*numéro de page*/
-            10 /*limite par page*/
+            // appelle la méthode findAllReservations() du ReservationRepository pour récupérer tous les objets Reservation et les trier par ordre croissant des salles
+            $reservationRepository->findAllReservations(), /* C'est la requête, non le résultat */
+            $request->query->getInt('page', 1), /* numéro de page */
+            10 /* limite par page */
         );
 
         return $this->render('pages/reservation/index.html.twig', [

@@ -39,6 +39,18 @@ class TypeReservationRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    * @return TypeReservation[] Retourne un tableau avec les objets de TypeReservation, triés par ordre croissant des noms
+     */
+    public function findAllTypeReservations(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return TypeReservation[] Returns an array of TypeReservation objects
 //     */

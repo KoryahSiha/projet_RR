@@ -39,6 +39,18 @@ class ReservationRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    * @return Reservation[] Retourne un tableau avec les objets de Reservation, triés par ordre croissant des salles
+     */
+    public function findAllReservations(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.salle', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Reservation[] Returns an array of Reservation objects
 //     */

@@ -56,6 +56,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user, true);
     }
 
+    /**
+    * @return User[] Retourne un tableau avec les objets de User, triés par ordre croissant des emails
+     */
+    public function findAllUsers(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.email', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
