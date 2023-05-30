@@ -2,20 +2,17 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
+use App\Entity\Domaine;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class UserCrudController extends AbstractCrudController
+class DomaineCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return User::class;
+        return Domaine::class;
     }
 
     // permet de configurer le CRUD.
@@ -24,28 +21,26 @@ class UserCrudController extends AbstractCrudController
     {
         return $crud
             // permet de définir les labels utilisés pour faire référence à cette entité dans les titres, les boutons, etc.
-            // définit le label 'Utilisateurs' de cette entité dans l'index
-            ->setEntityLabelInPlural('Utilisateurs')
-            // définit le label 'Utilisateur' de cette entité dans la page de modification
-            ->setEntityLabelInSingular('Utilisateur')
+            // définit le label 'Domaines' de cette entité dans l'index
+            ->setEntityLabelInPlural('Domaines')
+            // définit le label 'Domaine' de cette entité dans la page de modification
+            ->setEntityLabelInSingular('Domaine')
 
             // définit le nom de la page
-            ->setPageTitle('index', 'Projet RR - Administration des utilisateurs')
+            ->setPageTitle('index', 'Projet RR - Administration des domaines')
             
             // définit le nombre de données à afficher par page.
             ->setPaginatorPageSize(20);
     }
     
-    // permet de configurer les champs de l'entité
+    // permet de configuer les champs de l'entité
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')
-                // l'id ne sera pas visible sur la page de modification.
+            // l'id ne sera pas visible sur la page de modification.
                 ->hideOnForm(),
-            TextField::new('email'),
-            ArrayField::new('roles', 'Rôle(s)'),
-            BooleanField::new('enabled', 'Activé(e)'),
+            TextField::new('nom')
         ];
     }
     

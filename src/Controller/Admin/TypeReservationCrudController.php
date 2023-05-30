@@ -2,20 +2,17 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
+use App\Entity\TypeReservation;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class UserCrudController extends AbstractCrudController
+class TypeReservationCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return User::class;
+        return TypeReservation::class;
     }
 
     // permet de configurer le CRUD.
@@ -24,13 +21,13 @@ class UserCrudController extends AbstractCrudController
     {
         return $crud
             // permet de définir les labels utilisés pour faire référence à cette entité dans les titres, les boutons, etc.
-            // définit le label 'Utilisateurs' de cette entité dans l'index
-            ->setEntityLabelInPlural('Utilisateurs')
-            // définit le label 'Utilisateur' de cette entité dans la page de modification
-            ->setEntityLabelInSingular('Utilisateur')
+            // définit le label 'Types de réservation' de cette entité dans l'index
+            ->setEntityLabelInPlural('Types de réservation')
+            // définit le label 'Type de réservation' de cette entité dans la page de modification
+            ->setEntityLabelInSingular('Type de réservation')
 
             // définit le nom de la page
-            ->setPageTitle('index', 'Projet RR - Administration des utilisateurs')
+            ->setPageTitle('index', 'Projet RR - Administration des types de réservation')
             
             // définit le nombre de données à afficher par page.
             ->setPaginatorPageSize(20);
@@ -41,11 +38,10 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
-                // l'id ne sera pas visible sur la page de modification.
+            // l'id ne sera pas visible sur la page de modification.
                 ->hideOnForm(),
-            TextField::new('email'),
-            ArrayField::new('roles', 'Rôle(s)'),
-            BooleanField::new('enabled', 'Activé(e)'),
+            TextField::new('nom'),
+            TextField::new('description'),
         ];
     }
     

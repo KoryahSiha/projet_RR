@@ -3,6 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Salle;
+use App\Entity\Domaine;
+use App\Entity\Reservation;
+use App\Entity\TypeReservation;
+use App\Entity\GestionnaireSalle;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -39,10 +44,20 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Projet RR - Administration')
             ->renderContentMaximized();
     }
-
+    
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
+        
+        // ajoute un lien vers l'accueil dans le dashboard
+        yield MenuItem::linkToRoute('Accueil', 'fas fa-home', 'app_home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fa-solid fa-user', User::class);
+
+        yield MenuItem::section('Calendrier');
+        yield MenuItem::linkToCrud('Gestionnaires de salle', 'fa-solid fa-person-dots-from-line', GestionnaireSalle::class);
+        yield MenuItem::linkToCrud('Domaines', 'fa-solid fa-building-user', Domaine::class);
+        yield MenuItem::linkToCrud('Salles', 'fa-solid fa-person-shelter', Salle::class);
+        yield MenuItem::linkToCrud('Types de réservation', 'fa-solid fa-calendar-week', TypeReservation::class);
+        yield MenuItem::linkToCrud('Réservations', 'fa-solid fa-calendar-days', Reservation::class);
+
     }
 }
