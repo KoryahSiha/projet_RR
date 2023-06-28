@@ -7,13 +7,26 @@
       <a class="navbar-brand" href="/">Mairie de Meurchin</a>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+          <a class="nav-link active" aria-current="page" href="/">Calendrier</a>
         </li>
         {% if is_granted('ROLE_ADMIN') %}
         <li class="nav-item">
           <a class="nav-link" href="/admin">Administration</a>
         </li>
         {% endif %}
+
+        {% if is_granted('ROLE_GESTIONNAIREDOM') %}
+        <li class="nav-item">
+          <a class="nav-link" href="/salle">Salles</a>
+        </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_GESTIONNAIRESAL') %}
+        <li class="nav-item">
+          <a class="nav-link" href="/reservation">Réservations</a>
+        </li>
+        {% endif %}
+
         <li class="nav-item">
           <a class="nav-link" href="/login">Se connecter</a>
         </li>
