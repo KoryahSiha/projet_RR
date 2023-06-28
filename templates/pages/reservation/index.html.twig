@@ -23,9 +23,8 @@
                     <th>Nom</th>
                     <th>Description</th>
                     <th>Date début</th>
-                    <th>Durée</th>
                     <th>Date fin</th>
-                    <th>Nombre participants</th>
+                    <th>Salle</th>
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
                         <th>Vue/Édition</th>
                     {% endif %}
@@ -38,9 +37,8 @@
                     <td>{{ reservation.title}}</td>
                     <td>{{ reservation.description }}</td>
                     <td>{{ reservation.start ? reservation.start|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ reservation.duration }}</td>
                     <td>{{ reservation.end ? reservation.end|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ reservation.participantNumber }}</td>
+                    <td>{{ reservation.salle }}</td>
                     <td>
                         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_GESTIONNAIRESAL') %}
                         <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">voir</a>

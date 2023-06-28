@@ -22,6 +22,7 @@
                     <th>Id</th>
                     <th>Nom</th>
                     <th>Prénom</th>
+                    <th>Utilisateur</th>
                     {% if is_granted('ROLE_ADMIN') %}
                         <th>Vue/Édition</th>
                     {% endif %}
@@ -33,6 +34,7 @@
                     <td>{{ gestionnaire_salle.id }}</td>
                     <td>{{ gestionnaire_salle.nom }}</td>
                     <td>{{ gestionnaire_salle.prenom }}</td>
+                    <td>{{ gestionnaire_salle.user }}</td>
                     <td>
                         {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('app_gestionnaire_salle_show', {'id': gestionnaire_salle.id}) }}">voir</a>
