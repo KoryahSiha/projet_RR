@@ -411,7 +411,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $reservation->setBackgroundColor($this->faker->hexColor());
             $reservation->setBorderColor($this->faker->hexColor());
             $reservation->setTextColor($this->faker->hexColor());
-            $reservation->setAllDay($this->faker->optional($weight = 0.8)->boolean());
+            $reservation->setAllDay($this->faker->optional($weight = 0.1)->boolean());
 
 
             $this->manager->persist($reservation);
