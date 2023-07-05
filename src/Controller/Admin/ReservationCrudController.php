@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Reservation;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -47,8 +47,8 @@ class ReservationCrudController extends AbstractCrudController
                 ->hideOnForm(),
             TextField::new('title', 'Nom'),
             TextField::new('description'),
-            DateField::new('start', 'Date début'),
-            DateField::new('end', 'Date fin'),
+            DateTimeField::new('start', 'Date et heure de début'),
+            DateTimeField::new('end', 'Date et heure de fin'),
             IntegerField::new('participant_number', 'Nombre de participants')
                 ->hideOnIndex(),
             TextField::new('duration', 'Durée')
