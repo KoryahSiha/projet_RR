@@ -1,3 +1,20 @@
 .nav-link:hover {
     color: rgb(255, 217, 63);
-} 
+}
+
+#logo {
+    position: relative;
+    width: 100px;
+    height: 60px;
+    padding-right: 10px;
+}
+
+.navbar-brand {
+    font-size: 1.5em;
+    font-weight: 400;
+    color: yellow;
+}
+
+.nav-item {
+    font-size: 1.1em;
+}
