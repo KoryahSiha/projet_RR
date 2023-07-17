@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ReservationRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
@@ -13,6 +14,7 @@ class Reservation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("reservation:read")]
     private ?int $id = null;
 
     #[Assert\NotBlank(message: "Soyez créatif, et pensez à un nom !")]
@@ -21,6 +23,7 @@ class Reservation
         max: 255,
     )]
     #[ORM\Column(length: 255)]
+    #[Groups("reservation:read")]
     private ?string $title = null;
 
     #[Assert\Length(
@@ -28,10 +31,12 @@ class Reservation
         max: 1000,
     )]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups("reservation:read")]
     private ?string $description = null;
 
     #[Assert\Type("DateTime")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups("reservation:read")]
     private ?\DateTimeInterface $start = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -39,6 +44,7 @@ class Reservation
 
     #[Assert\Type("DateTime")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups("reservation:read")]
     private ?\DateTimeInterface $end = null;
 
     #[Assert\Positive]
@@ -48,11 +54,13 @@ class Reservation
     #[Assert\NotNull(message: "Veuillez renseigner une salle")]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups("reservation:read")]
     private ?Salle $salle = null;
 
     #[Assert\NotNull(message: "Veuillez renseigner un type de réservation")]
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups("reservation:read")]
     private ?TypeReservation $type_reservation = null;
 
     #[Assert\NotNull(message: "Veuillez renseigner un gestionnaire de salle")]
@@ -61,15 +69,19 @@ class Reservation
     private ?GestionnaireSalle $gestionnaire_salle = null;
 
     #[ORM\Column(length: 7)]
+    #[Groups("reservation:read")]
     private ?string $background_color = null;
 
     #[ORM\Column(length: 7)]
+    #[Groups("reservation:read")]
     private ?string $border_color = null;
 
     #[ORM\Column(length: 7)]
+    #[Groups("reservation:read")]
     private ?string $text_color = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("reservation:read")]
     private ?bool $all_day = null;
 
     public function getId(): ?int

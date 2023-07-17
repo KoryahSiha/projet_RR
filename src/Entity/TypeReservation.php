@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\TypeReservationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\Collection;
+use App\Repository\TypeReservationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: TypeReservationRepository::class)]
 #[UniqueEntity(fields: ['nom'], message: 'Un type de réservation existe déjà sous ce nom')]
@@ -25,6 +26,7 @@ class TypeReservation
         max: 255,
     )]
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups("reservation:read")]
     private ?string $nom = null;
 
     #[Assert\Length(
