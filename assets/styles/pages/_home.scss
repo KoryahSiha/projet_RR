@@ -1,7 +1,73 @@
-.calendrier {
-    width: 80%;
-    margin: auto;
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
 }
+
+#calendrier {
+    order: 1;
+    width: 75%;
+}
+
+#reservation {
+    order: 2;
+    height: 50px;
+    margin-bottom: 200px;
+    padding: 10px;
+    font-size: 1.3em;
+    text-decoration: none;
+    border-radius: 40px;
+}
+
+#legend {
+    order: 3;
+    margin: auto;
+    padding: 10px;
+    height: 450px;
+    border: 1px solid #ccc;
+    background: #148a9c;
+}
+
+.reservation-legend-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#legend h4 {
+    padding: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    text-align: center;
+}
+
+.legend__name1, .legend__name2, .legend__name3, .legend__name4 {
+    margin: 5% auto;
+    width: 85%;
+    text-align: center;
+    color: white;
+    padding: 5px;
+    border-radius: 10px 100px / 120px;
+}
+
+.legend__name1 {
+    background-color: rgb(61, 184, 255);
+}
+
+.legend__name2 {
+    background-color: rgb(48, 212, 62);
+}
+
+.legend__name3 {
+    background-color: rgb(255, 204, 0);
+}
+
+.legend__name4 {
+    background-color: rgb(255, 0, 187);
+}
+
 
 .display-4 {
     color: rgb(57, 119, 137);

@@ -37,7 +37,7 @@ class HomeController extends AbstractController
 
         $data = json_encode($events);
 
-        return $this->render('pages/home.html.twig', ['data' => $data]);
+        return $this->render('pages/home.html.twig', compact('data'));
     }
 
 }
