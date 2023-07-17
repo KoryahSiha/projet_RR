@@ -396,14 +396,16 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $this->manager->persist($reservation);
         }
 
-        for ($i = 0; $i < 40; $i++ ) {
+        for ($i = 0; $i < 15; $i++ ) {
             $reservation = new Reservation();
 
             $reservation->setTitle($this->faker->words(5, true));
             $reservation->setDescription($this->faker->optional($weight = 0.6)->text());
-            $reservation->setStart($this->faker->dateTimeBetween('-1 month', '- 1 week'));
-            $reservation->setDuration($this->faker->optional($weight = 0.8)->numerify('##:##:00'));
-            $reservation->setEnd($this->faker->dateTimeBetween('-1 day', '+2 days'));
+            $reservation->setStart($startDate = $this->faker->dateTimeThisMonth());
+            // clone l'heure de début et la modifie en y ajoutant une durée comprise entre 1 et 4 heures
+            $reservation->setEnd($endDate = (clone $startDate)->modify('+' . $this->faker->numberBetween(1, 4) . ' hours'));
+            // utilisation de la méthode diff() pour calculer la différence entre l'heure de début et l'heure de fin
+            $reservation->setDuration($endDate->diff($startDate)->format('%H:%I:%S'));
             $reservation->setParticipantNumber($this->faker->numberBetween(5, 300));
             $reservation->setSalle($this->faker->randomElement($salles));
             $reservation->setTypeReservation($this->faker->randomElement($typeReservations));
