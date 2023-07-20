@@ -17,7 +17,9 @@
     padding: 10px;
     font-size: 1.1em;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 7px;
+    color: white;
+    background: #246b97;
 }
 
 #legend {
@@ -25,8 +27,7 @@
     margin: auto;
     padding: 10px;
     height: 450px;
-    border: 1px solid #ccc;
-    background: #148a9c;
+    background: #ecf8fd;
     border-radius: 10px;
 }
 
@@ -35,11 +36,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    border: thick double #ecf8fd;
+    background-color: #53697c;
 }
 
 #legend h4 {
     padding: 20px;
-    color: rgb(255, 255, 255);
+    color: rgb(145, 145, 145);
     font-weight: 400;
     text-align: center;
 }
@@ -54,7 +58,7 @@
 }
 
 .legend__name1 {
-    background-color: rgb(61, 184, 255);
+    background-color: rgb(64, 140, 238);
 }
 
 .legend__name2 {
