@@ -32,7 +32,7 @@ class HomeController extends AbstractController
                 'textColor' => $reservation->getTextColor(),
                 'allDay' => $reservation->getAllDay(),
                 'salle' => $reservation->getSalle()->getNom(),
-                'url' => $reservation->getUrl(),
+                'url' => $this->generateUrl('app_reservation_show', ['id' => $reservation->getId()]),
             ];
         }
 
