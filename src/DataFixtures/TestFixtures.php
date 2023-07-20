@@ -327,7 +327,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'background_color' => 'green',
                 'border_color' => 'green',
                 'text_color' => 'white',
-                'all_day' => null
+                'all_day' => null,
+                'url' => null,
             ],
             [
                 'title' => 'Réunion Chefs de services',
@@ -342,7 +343,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'background_color' => 'green',
                 'border_color' => 'green',
                 'text_color' => 'white',
-                'all_day' => null
+                'all_day' => null,
+                'url' => 'http://pagac.com/',
             ],
             [
                 'title' => 'Gym d\'entretien',
@@ -357,7 +359,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'background_color' => 'orange',
                 'border_color' => 'orange',
                 'text_color' => 'black',
-                'all_day' => true
+                'all_day' => true,
+                'url' => 'http://pagaille.com/'
             ],
             [
                 'title' => 'Mariage Mr et Mllle Grelot',
@@ -372,7 +375,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'background_color' => 'blue',
                 'border_color' => 'green',
                 'text_color' => 'black',
-                'all_day' => false
+                'all_day' => false,
+                'url' => 'http://pagaie.com/'
             ],
         ];
 
@@ -392,6 +396,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $reservation->setBorderColor($data['border_color']);
             $reservation->setTextColor($data['text_color']);
             $reservation->setAllDay($data['all_day']);
+            $reservation->setUrl($data['url']);
 
             $this->manager->persist($reservation);
         }
@@ -414,6 +419,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $reservation->setBorderColor($this->faker->hexColor());
             $reservation->setTextColor($this->faker->hexColor());
             $reservation->setAllDay($this->faker->optional($weight = 0.1)->boolean());
+            $reservation->setUrl($this->faker->optional($weight = 0.1)->url());
 
 
             $this->manager->persist($reservation);

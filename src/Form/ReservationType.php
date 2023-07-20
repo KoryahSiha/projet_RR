@@ -25,7 +25,7 @@ class ReservationType extends AbstractType
                 'attr' => [
                     'class' => 'form-control w-50'
                 ],
-                'label' => 'Nom',
+                'label' => 'Nom :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ]
@@ -155,6 +155,15 @@ class ReservationType extends AbstractType
                     'class' => 'form-label mt-4'
                 ],
                 'required' => false,
+            ])
+            ->add('url', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control w-50'
+                ],
+                'label' => 'URL :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ]
             ])
         ;
     }

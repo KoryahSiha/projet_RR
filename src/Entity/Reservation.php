@@ -84,6 +84,9 @@ class Reservation
     #[Groups("reservation:read")]
     private ?bool $all_day = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $url = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -241,6 +244,18 @@ class Reservation
     public function setAllDay(?bool $all_day): self
     {
         $this->all_day = $all_day;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): static
+    {
+        $this->url = $url;
 
         return $this;
     }

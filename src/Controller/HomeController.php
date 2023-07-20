@@ -23,15 +23,16 @@ class HomeController extends AbstractController
                 'end' => $reservation->getEnd()->format('Y-m-d H:i:s'),
                 'title' => $reservation->getTitle(),
                 'description' => $reservation->getDescription(),
-                'typeReservation' => $reservation->getTypeReservation(),
-                'gestionnaireSalle' => $reservation->getGestionnaireSalle(),
+                'typeReservation' => $reservation->getTypeReservation()->getNom(),
+                'gestionnaireSalle' => $reservation->getGestionnaireSalle()->__toString(),
                 'participantNumber' => $reservation->getParticipantNumber(),
                 'duration' => $reservation->getDuration(),
                 'backgroundColor' => $reservation->getBackgroundColor(),
                 'borderColor' => $reservation->getBorderColor(),
                 'textColor' => $reservation->getTextColor(),
                 'allDay' => $reservation->getAllDay(),
-                'salle' => $reservation->getSalle(),
+                'salle' => $reservation->getSalle()->getNom(),
+                'url' => $reservation->getUrl(),
             ];
         }
 
