@@ -33,6 +33,18 @@
                     <td>{{ reservation.end ? reservation.end|date('Y-m-d H:i:s') : '' }}</td>
                 </tr>
                 <tr>
+                    <th>Salle</th>
+                    <td>{{ reservation.salle }}</td>
+                </tr>
+                <tr>
+                    <th>Type de réservation</th>
+                    <td>{{ reservation.typeReservation }}</td>
+                </tr>
+                <tr>
+                    <th>Gestionnaire de salle</th>
+                    <td>{{ reservation.gestionnaireSalle }}</td>
+                </tr>
+                <tr>
                     <th>Nombre participants</th>
                     <td>{{ reservation.participantNumber }}</td>
                 </tr>
