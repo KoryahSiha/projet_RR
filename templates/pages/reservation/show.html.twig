@@ -45,7 +45,7 @@
                     <td>{{ reservation.deposit }}</td>
                 </tr><tr>
                     <th>Payé</th>
-                    <td>{{ reservation.paid }}</td>
+                    <td>{{ reservation.paid == 'oui' ? 'Oui' : 'Non' }}</td>
                 </tr>
                 <tr>
                     <th>Gestionnaire de salle</th>
@@ -69,7 +69,7 @@
                 </tr>
                 <tr>
                     <th>Toute la journée</th>
-                    <td>{{ reservation.allDay }}</td>
+                    <td>{{ reservation.allDay == 'oui' ? 'Oui' : 'Non' }}</td>
                 </tr>
             </tbody>
         </table>
