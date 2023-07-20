@@ -50,7 +50,6 @@ window.onload = () => {
             "salle": e.event.extendedProps.salle,
             "typeReservation": e.event.extendedProps.typeReservation,
             "gestionnaireSalle": e.event.extendedProps.gestionnaireSalle,
-            "duration": e.event.extendedProps.duration,
             "participantNumber": e.event.extendedProps.participantNumber,
             "url": e.event.url,
             "deposit": e.event.extendedProps.deposit,

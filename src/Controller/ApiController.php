@@ -188,10 +188,6 @@ class ApiController extends AbstractController
             // Gérer l'exception ici
             echo "Erreur : " . $e->getMessage();
         }
-
-        if (property_exists($donnees, 'duration')) {
-            $reservation->setDuration($donnees->duration);
-        }
         $reservation->setParticipantNumber($donnees->participantNumber);
         $reservation->setUrl($donnees->url);
         $reservation->setDeposit($donnees->deposit);

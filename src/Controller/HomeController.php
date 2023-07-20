@@ -26,7 +26,6 @@ class HomeController extends AbstractController
                 'typeReservation' => $reservation->getTypeReservation()->getNom(),
                 'gestionnaireSalle' => $reservation->getGestionnaireSalle()->__toString(),
                 'participantNumber' => $reservation->getParticipantNumber(),
-                'duration' => $reservation->getDuration(),
                 'backgroundColor' => $reservation->getBackgroundColor(),
                 'borderColor' => $reservation->getBorderColor(),
                 'textColor' => $reservation->getTextColor(),
