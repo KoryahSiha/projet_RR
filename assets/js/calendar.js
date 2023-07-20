@@ -28,6 +28,12 @@ window.onload = () => {
                 infos.revert()
             }
         },
+        eventClick: function(event) {
+            if (event.url) {
+                window.open(event.url);
+                return false; // Empêche le navigateur de suivre le lien de l'événement
+            }
+        }
     });
 
     calendar.on('eventChange', (e) => {
