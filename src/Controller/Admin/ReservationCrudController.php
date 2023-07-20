@@ -66,6 +66,8 @@ class ReservationCrudController extends AbstractCrudController
                 ->hideOnIndex(),
             ColorField::new('text_color', 'Couleur de texte')
                 ->hideOnIndex(),
+            TextField::new('url')
+                ->hideOnIndex(),
         ];
     }
     
