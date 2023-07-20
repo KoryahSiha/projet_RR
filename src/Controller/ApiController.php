@@ -194,6 +194,8 @@ class ApiController extends AbstractController
         }
         $reservation->setParticipantNumber($donnees->participantNumber);
         $reservation->setUrl($donnees->url);
+        $reservation->setDeposit($donnees->deposit);
+        $reservation->setPaid($donnees->paid);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($reservation);

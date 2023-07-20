@@ -329,6 +329,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'text_color' => 'white',
                 'all_day' => null,
                 'url' => null,
+                'deposit' => null,
+                'paid' => null
             ],
             [
                 'title' => 'Réunion Chefs de services',
@@ -345,6 +347,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'text_color' => 'white',
                 'all_day' => null,
                 'url' => 'http://pagac.com/',
+                'deposit' => null,
+                'paid' => null
             ],
             [
                 'title' => 'Gym d\'entretien',
@@ -360,7 +364,9 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'border_color' => 'orange',
                 'text_color' => 'black',
                 'all_day' => true,
-                'url' => 'http://pagaille.com/'
+                'url' => 'http://pagaille.com/',
+                'deposit' => null,
+                'paid' => null
             ],
             [
                 'title' => 'Mariage Mr et Mllle Grelot',
@@ -376,7 +382,9 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'border_color' => 'green',
                 'text_color' => 'black',
                 'all_day' => false,
-                'url' => 'http://pagaie.com/'
+                'url' => 'http://pagaie.com/',
+                'deposit' => null,
+                'paid' => null
             ],
         ];
 
@@ -397,6 +405,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $reservation->setTextColor($data['text_color']);
             $reservation->setAllDay($data['all_day']);
             $reservation->setUrl($data['url']);
+            $reservation->setDeposit($data['deposit']);
+            $reservation->setPaid($data['paid']);
 
             $this->manager->persist($reservation);
         }
@@ -420,6 +430,9 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $reservation->setTextColor($this->faker->hexColor());
             $reservation->setAllDay($this->faker->optional($weight = 0.1)->boolean());
             $reservation->setUrl($this->faker->optional($weight = 0.1)->url());
+            $reservation->setDeposit($this->faker->optional($weight = 0.1)->numberBetween(50, 400));
+            $reservation->setPaid($this->faker->optional($weight = 0.1)->boolean());
+
 
 
             $this->manager->persist($reservation);

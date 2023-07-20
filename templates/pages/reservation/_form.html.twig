@@ -113,5 +113,21 @@ La désactivation est utilise pour tester les formulaires et les erreurs côté 
 		</div>
 	</div>
 
+	<div class="form-group">
+		{{ form_label(form.deposit) }}
+		{{ form_widget(form.deposit) }}
+		<div class="form-error">
+			{{ form_errors(form.deposit) }}
+		</div>
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.paid) }}
+		{{ form_widget(form.paid) }}
+		<div class="form-error">
+			{{ form_errors(form.paid) }}
+		</div>
+	</div>
+
     <button class="btn btn-primary mt-4 btn-sm">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

@@ -53,6 +53,8 @@ window.onload = () => {
             "duration": e.event.extendedProps.duration,
             "participantNumber": e.event.extendedProps.participantNumber,
             "url": e.event.url,
+            "deposit": e.event.extendedProps.deposit,
+            "paid": e.event.extendedProps.paid,
 
         }
         console.log(donnees);

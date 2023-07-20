@@ -87,6 +87,12 @@ class Reservation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $url = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $deposit = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $paid = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -256,6 +262,30 @@ class Reservation
     public function setUrl(?string $url): static
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getDeposit(): ?int
+    {
+        return $this->deposit;
+    }
+
+    public function setDeposit(?int $deposit): static
+    {
+        $this->deposit = $deposit;
+
+        return $this;
+    }
+
+    public function isPaid(): ?bool
+    {
+        return $this->paid;
+    }
+
+    public function setPaid(?bool $paid): static
+    {
+        $this->paid = $paid;
 
         return $this;
     }

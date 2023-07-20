@@ -165,6 +165,22 @@ class ReservationType extends AbstractType
                     'class' => 'form-label mt-4'
                 ]
             ])
+            ->add('deposit', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control w-50'
+                ],
+                'label' => 'Acompte :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ]
+            ])
+            ->add('paid', CheckboxType::class, [
+                'label' => 'Payé ?',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'required' => false,
+            ])
         ;
     }
 

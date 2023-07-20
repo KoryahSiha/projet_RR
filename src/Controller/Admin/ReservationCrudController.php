@@ -58,6 +58,10 @@ class ReservationCrudController extends AbstractCrudController
             // AssociationField permet d'afficher le contenu d'une propriété utilisée pour associer des entités entre elles.
             AssociationField::new('salle', 'Salle'),
             AssociationField::new('type_reservation', 'Type de réservation'),
+            IntegerField::new('deposit', 'Acompte')
+                ->hideOnIndex(),
+            BooleanField::new('paid', 'Payé')
+                ->hideOnIndex(),
             AssociationField::new('gestionnaire_salle', 'Gestionnaire de salle')
                 ->hideOnIndex(),
             ColorField::new('background_color', 'Couleur de fond')

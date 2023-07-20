@@ -33,6 +33,8 @@ class HomeController extends AbstractController
                 'allDay' => $reservation->getAllDay(),
                 'salle' => $reservation->getSalle()->getNom(),
                 'url' => $this->generateUrl('app_reservation_show', ['id' => $reservation->getId()]),
+                'deposit' => $reservation->getDeposit(),
+                'paid' => $reservation->isPaid(),
             ];
         }
 
