@@ -33,6 +33,9 @@ class ReservationCrudController extends AbstractCrudController
 
             // définit le nom de la page
             ->setPageTitle('index', 'Projet RR - Administration des réservations')
+
+            // trie les dates de réservations par ordre décroissant
+            ->setDefaultSort(['start' => 'DESC'])
             
             // définit le nombre de données à afficher par page.
             ->setPaginatorPageSize(20);

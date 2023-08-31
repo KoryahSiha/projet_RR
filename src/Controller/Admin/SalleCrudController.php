@@ -33,6 +33,9 @@ class SalleCrudController extends AbstractCrudController
 
             // définit le nom de la page
             ->setPageTitle('index', 'Projet RR - Administration des salles')
+
+            // trie les noms des domaines par ordre croissant
+            ->setDefaultSort(['nom' => 'ASC'])
             
             // définit le nombre de données à afficher par page.
             ->setPaginatorPageSize(20);
