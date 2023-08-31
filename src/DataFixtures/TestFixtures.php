@@ -53,6 +53,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         $this->loadReservations();
     }
 
+    // la méthode void est principalement utilisée pour faire des traitements et des opérations internes sans renvoyer de résultat exploitable directement.
     public function loadUsers(): void
     {
         // création des données statiques
