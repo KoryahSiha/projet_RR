@@ -26,8 +26,6 @@ class SalleCrudController extends AbstractCrudController
     {
         return $crud
             // permet de définir les labels utilisés pour faire référence à cette entité dans les titres, les boutons, etc.
-            // définit le label 'Salles' de cette entité dans l'index
-            ->setEntityLabelInPlural('Salles')
             // définit le label 'Salle' de cette entité dans la page de modification
             ->setEntityLabelInSingular('Salle')
 

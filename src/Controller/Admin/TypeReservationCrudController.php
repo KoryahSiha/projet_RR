@@ -21,8 +21,6 @@ class TypeReservationCrudController extends AbstractCrudController
     {
         return $crud
             // permet de définir les labels utilisés pour faire référence à cette entité dans les titres, les boutons, etc.
-            // définit le label 'Types de réservation' de cette entité dans l'index
-            ->setEntityLabelInPlural('Types de réservation')
             // définit le label 'Type de réservation' de cette entité dans la page de modification
             ->setEntityLabelInSingular('Type de réservation')
 

@@ -24,8 +24,6 @@ class UserCrudController extends AbstractCrudController
     {
         return $crud
             // permet de définir les labels utilisés pour faire référence à cette entité dans les titres, les boutons, etc.
-            // définit le label 'Utilisateurs' de cette entité dans l'index
-            ->setEntityLabelInPlural('Utilisateurs')
             // définit le label 'Utilisateur' de cette entité dans la page de modification
             ->setEntityLabelInSingular('Utilisateur')
 

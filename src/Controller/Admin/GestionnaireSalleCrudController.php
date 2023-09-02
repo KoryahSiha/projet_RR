@@ -23,8 +23,6 @@ class GestionnaireSalleCrudController extends AbstractCrudController
     {
         return $crud
             // permet de définir les labels utilisés pour faire référence à cette entité dans les titres, les boutons, etc.
-            // définit le label 'Gestionnaires de salle' de cette entité dans l'index
-            ->setEntityLabelInPlural('Gestionnaires de salle')
             // définit le label 'Gestionnaire de salle' de cette entité dans la page de modification
             ->setEntityLabelInSingular('Gestionnaire de salle')
 
