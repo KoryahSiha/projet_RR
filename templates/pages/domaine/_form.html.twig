@@ -1,6 +1,4 @@
-{# 'novalidate' permet de désactiver côté client la validation HTML du formulaire.
-La désactivation est utilise pour tester les formulaires et les erreurs côté serveur. #}
-{{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
+{{ form_start(form) }}
 	
     <div class="form-group">
 		{{ form_label(form.nom) }}

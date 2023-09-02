@@ -29,7 +29,8 @@ class TypeReservationType extends AbstractType
                 'label' => 'Description :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'required' => false,
             ])
         ;
     }

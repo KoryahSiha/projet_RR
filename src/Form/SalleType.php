@@ -32,7 +32,8 @@ class SalleType extends AbstractType
                 'label' => 'Description :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'required' => false,
             ])
             ->add('personnes_max', NumberType::class, [
                 'attr' => [
@@ -41,7 +42,8 @@ class SalleType extends AbstractType
                 'label' => 'Nombre de participants :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'required' => false,
             ])
             ->add('domaine', EntityType::class, [
                 'class' => Domaine::class,

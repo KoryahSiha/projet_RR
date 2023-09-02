@@ -1,133 +1,34 @@
-{# 'novalidate' permet de désactiver côté client la validation HTML du formulaire.
-La désactivation est utilise pour tester les formulaires et les erreurs côté serveur. #}
-{{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
+{{ form_start(form) }}
+
+{% set fields = [
+    'title',
+    'description',
+    'start',
+    'duration',
+    'end',
+    'participant_number',
+    'salle',
+    'type_reservation',
+    'gestionnaire_salle',
+    'background_color',
+    'border_color',
+    'text_color',
+    'all_day',
+    'url',
+    'deposit',
+    'paid'
+    ]
+%}
+
+{% for field in fields %}
     <div class="form-group">
-		{{ form_label(form.title) }}
-		{{ form_widget(form.title) }}
-		<div class="form-error">
-			{{ form_errors(form.title) }}
-		</div>
-	</div>
+        {{ form_label(attribute(form, field)) }}
+        {{ form_widget(attribute(form, field)) }}
+        <div class="form-error">
+            {{ form_errors(attribute(form, field)) }}
+        </div>
+    </div>
+{% endfor %}
 
-	<div class="form-group">
-		{{ form_label(form.description) }}
-		{{ form_widget(form.description) }}
-		<div class="form-error">
-			{{ form_errors(form.description) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.start) }}
-		{{ form_widget(form.start) }}
-		<div class="form-error">
-			{{ form_errors(form.start) }}
-		</div>
-	</div>
-    
-    <div class="form-group">
-		{{ form_label(form.duration) }}
-		{{ form_widget(form.duration) }}
-		<div class="form-error">
-			{{ form_errors(form.duration) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.end) }}
-		{{ form_widget(form.end) }}
-		<div class="form-error">
-			{{ form_errors(form.end) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.participant_number) }}
-		{{ form_widget(form.participant_number) }}
-		<div class="form-error">
-			{{ form_errors(form.participant_number) }}
-		</div>
-	</div>
-
-    <div class="form-group">
-		{{ form_label(form.salle) }}
-		{{ form_widget(form.salle) }}
-		<div class="form-error">
-			{{ form_errors(form.salle) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.type_reservation) }}
-		{{ form_widget(form.type_reservation) }}
-		<div class="form-error">
-			{{ form_errors(form.type_reservation) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.gestionnaire_salle) }}
-		{{ form_widget(form.gestionnaire_salle) }}
-		<div class="form-error">
-			{{ form_errors(form.gestionnaire_salle) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.background_color) }}
-		{{ form_widget(form.background_color) }}
-		<div class="form-error">
-			{{ form_errors(form.background_color) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.border_color) }}
-		{{ form_widget(form.border_color) }}
-		<div class="form-error">
-			{{ form_errors(form.border_color) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.text_color) }}
-		{{ form_widget(form.text_color) }}
-		<div class="form-error">
-			{{ form_errors(form.text_color) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.all_day) }}
-		{{ form_widget(form.all_day) }}
-		<div class="form-error">
-			{{ form_errors(form.all_day) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.url) }}
-		{{ form_widget(form.url) }}
-		<div class="form-error">
-			{{ form_errors(form.url) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.deposit) }}
-		{{ form_widget(form.deposit) }}
-		<div class="form-error">
-			{{ form_errors(form.deposit) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ form_label(form.paid) }}
-		{{ form_widget(form.paid) }}
-		<div class="form-error">
-			{{ form_errors(form.paid) }}
-		</div>
-	</div>
-
-    <button class="btn btn-primary mt-4 btn-sm">{{ button_label|default('Enregistrer') }}</button>
+<button class="btn btn-primary mt-4 btn-sm">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

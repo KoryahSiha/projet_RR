@@ -37,7 +37,8 @@ class ReservationType extends AbstractType
                 'label' => 'Description :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'required' => false,
             ])
             ->add('start', DateTimeType::class, [
                 'attr' => [
@@ -56,7 +57,8 @@ class ReservationType extends AbstractType
                 'label' => 'Durée :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'required' => false,
             ])
             ->add('end', DateTimeType::class, [
                 'attr' => [
@@ -75,7 +77,8 @@ class ReservationType extends AbstractType
                 'label' => 'Nombre de participants :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'required' => false,
             ])
             ->add('salle', EntityType::class, [
                 'class' => Salle::class,
@@ -163,7 +166,8 @@ class ReservationType extends AbstractType
                 'label' => 'URL :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'required' => false,
             ])
             ->add('deposit', TextType::class, [
                 'attr' => [
@@ -172,7 +176,8 @@ class ReservationType extends AbstractType
                 'label' => 'Acompte :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'required' => false,
             ])
             ->add('paid', CheckboxType::class, [
                 'label' => 'Payé ?',
