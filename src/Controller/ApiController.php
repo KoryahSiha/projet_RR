@@ -125,84 +125,83 @@ class ApiController extends AbstractController
             isset($donnees->typeReservation) && !empty($donnees->typeReservation) &&
             isset($donnees->gestionnaireSalle) && !empty($donnees->gestionnaireSalle)
         ){
-        // Les données sont complètes
-        // On initialise un code
-        $code = 200;
-    
-        // On vérifie si l'id existe
-        if(!$reservation){
-            // On instancie un rendez-vous
-            $reservation = new Calendar;
-    
-        // On change le code
-            $code = 201;
-        }
-    
-        // // On hydrate (remplir ou initialiser les propriétés d'un objet à partir des données fournies)
-        $reservation->setTitle($donnees->title);
-        $reservation->setDescription($donnees->description);
-        $reservation->setStart(new DateTime($donnees->start));
-        if($donnees->allDay){
-            $reservation->setEnd(new DateTime($donnees->start));
-        }else{
-            $reservation->setEnd(new DateTime($donnees->end));
-        }
-        $reservation->setAllDay($donnees->allDay);
-        $reservation->setBackgroundColor($donnees->backgroundColor);
-        $reservation->setBorderColor($donnees->borderColor);
-        $reservation->setTextColor($donnees->textColor);
-        $salleRepository = $this->getDoctrine()->getRepository(Salle::class);
-        $salle = $salleRepository->find($donnees->salle);
-
-        try {
-            $salleRepository = $this->getDoctrine()->getRepository(Salle::class);
-            $salle = $salleRepository->find($donnees->salle);
+            // Les données sont complètes
+            // On initialise un code
+            $code = 200;
         
-            if (!$salle) {
-                throw new \RuntimeException("Salle introuvable : " . $donnees->salle);
-            }        
-            // Hydratation de l'objet Reservation avec la salle associée
-            $reservation->setSalle($salle);
-
-
-            $typeReservationRepository = $this->getDoctrine()->getRepository(TypeReservation::class);
-            $typeReservation = $typeReservationRepository->find($donnees->typeReservation);
-
-            if (!$typeReservation) {
-                throw new \RuntimeException("Type de réservation introuvable : " . $donnees->typeReservation);
-            }
-            // Hydratation de l'objet Reservation avec le type de réservation associé
-            $reservation->setTypeReservation($typeReservation);
-
-
-            $gestionnaireSalleRepository = $this->getDoctrine()->getRepository(GestionnaireSalle::class);
-            $gestionnaireSalle = $gestionnaireSalleRepository->find($donnees->gestionnaireSalle);
-
-            if (!$gestionnaireSalle) {
-                throw new \RuntimeException("Gestionnaire de salle introuvable : " . $donnees->gestionnaireSalle);
-            }
-            // Hydratation de l'objet Reservation avec le gestionnaire de salle associé
-            $reservation->setGestionnaireSalle($gestionnaireSalle);
+            // On vérifie si l'id existe
+            if(!$reservation){
+                // On instancie une réservation
+                $reservation = new Calendar;
         
-        } catch (Exception $e) {
-            // Gérer l'exception ici
-            echo "Erreur : " . $e->getMessage();
-        }
-        $reservation->setParticipantNumber($donnees->participantNumber);
-        $reservation->setUrl($donnees->url);
-        $reservation->setDeposit($donnees->deposit);
-        $reservation->setPaid($donnees->paid);
+            // On change le code
+                $code = 201;
+            }
+        
+            // // On hydrate (remplir ou initialiser les propriétés d'un objet à partir des données fournies)
+            $reservation->setTitle($donnees->title);
+            $reservation->setDescription($donnees->description);
+            $reservation->setStart(new DateTime($donnees->start));
+            if($donnees->allDay){
+                $reservation->setEnd(new DateTime($donnees->start));
+            }else{
+                $reservation->setEnd(new DateTime($donnees->end));
+            }
+            $reservation->setAllDay($donnees->allDay);
+            $reservation->setBackgroundColor($donnees->backgroundColor);
+            $reservation->setBorderColor($donnees->borderColor);
+            $reservation->setTextColor($donnees->textColor);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($reservation);
-        $em->flush();
-    
-        // // On retourne le code
-        return new Response('Ok', $code);
-    }else{
-        // Les données sont incomplètes
-        return new Response('Données incomplètes', 404);
-    }
+            try {
+                $salleRepository = $this->getDoctrine()->getRepository(Salle::class);
+                $salle = $salleRepository->find($donnees->salle);
+            
+                if (!$salle) {
+                    throw new \RuntimeException("Salle introuvable : " . $donnees->salle);
+                }        
+                // Hydratation de l'objet Reservation avec la salle associée
+                $reservation->setSalle($salle);
+
+
+                $typeReservationRepository = $this->getDoctrine()->getRepository(TypeReservation::class);
+                $typeReservation = $typeReservationRepository->find($donnees->typeReservation);
+
+                if (!$typeReservation) {
+                    throw new \RuntimeException("Type de réservation introuvable : " . $donnees->typeReservation);
+                }
+                // Hydratation de l'objet Reservation avec le type de réservation associé
+                $reservation->setTypeReservation($typeReservation);
+
+
+                $gestionnaireSalleRepository = $this->getDoctrine()->getRepository(GestionnaireSalle::class);
+                $gestionnaireSalle = $gestionnaireSalleRepository->find($donnees->gestionnaireSalle);
+
+                if (!$gestionnaireSalle) {
+                    throw new \RuntimeException("Gestionnaire de salle introuvable : " . $donnees->gestionnaireSalle);
+                }
+                // Hydratation de l'objet Reservation avec le gestionnaire de salle associé
+                $reservation->setGestionnaireSalle($gestionnaireSalle);
+            
+            } catch (Exception $e) {
+                // Gérer l'exception ici
+                echo "Erreur : " . $e->getMessage();
+            }
+            $reservation->setParticipantNumber($donnees->participantNumber);
+            $reservation->setUrl($donnees->url);
+            $reservation->setDeposit($donnees->deposit);
+            $reservation->setPaid($donnees->paid);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($reservation);
+            $em->flush();
+        
+            // // On retourne le code
+            return new Response('Ok', $code);
+            
+        } else{
+            // Les données sont incomplètes
+            return new Response('Données incomplètes', 404);
+        }
     
     
         return $this->render('api/index.html.twig', [
