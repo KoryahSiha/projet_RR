@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -42,6 +43,7 @@ class UserCrudController extends AbstractCrudController
                 // l'id ne sera pas visible sur la page de modification.
                 ->hideOnForm(),
             TextField::new('email'),
+            TextField::new('password', 'Mot de passe'),
             ArrayField::new('roles', 'Rôle(s)'),
             BooleanField::new('enabled', 'Activé(e)'),
         ];
