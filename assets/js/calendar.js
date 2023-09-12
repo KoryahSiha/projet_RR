@@ -24,7 +24,10 @@ window.onload = () => {
         selectable: true,
         droppable: true,
         eventDrop: (infos) => {
-            if(!confirm('Étes-vous sûr(e) de vouloir déplacer cette réservation ?')) {
+            if (!isGestionnaireSal) {
+                alert('Vous n\'avez pas la permission de déplacer cette réservation.');
+                infos.revert();
+            } else if (!confirm('Étes-vous sûr(e) de vouloir déplacer cette réservation ?')) {
                 infos.revert()
             }
         },

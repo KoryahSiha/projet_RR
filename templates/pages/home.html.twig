@@ -43,8 +43,15 @@
 {% endblock %}
 
 {% block javascripts %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
     {{ parent() }}
     <script>
         let events = {{ data|raw }};
     </script>
+    <script>
+        let isGestionnaireSal = {{ is_granted('ROLE_GESTIONNAIRESAL') ? 'true' : 'false' }};
+    </script>
+{% else %}
+    <p class="loginEvents">Vous devez être connecté(e) pour voir le calendrier.</p>
+{% endif %}
 {% endblock %}
