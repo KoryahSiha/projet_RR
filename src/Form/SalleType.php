@@ -39,7 +39,7 @@ class SalleType extends AbstractType
                 'attr' => [
                     'class' => 'form-control w-50'
                 ],
-                'label' => 'Nombre de participants :',
+                'label' => 'Nombre de participants maximum :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
